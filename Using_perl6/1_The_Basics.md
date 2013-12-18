@@ -51,6 +51,6 @@ perl_1-1
 27 say "$n has won %matches{$n} matches and %sets{$n} sets";
 28 }
 ```
-![plot of chunk unnamed-chunk-1](fig1/1.png) 
+![plot of chunk unnamed-chunk-1](fig1/1.PNG) 
 
 
