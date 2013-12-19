@@ -53,4 +53,10 @@ perl_1-1
 ```
 ![plot of chunk unnamed-chunk-1](fig1/1.PNG) 
 
+从程序中学到的东西：
+1：文件的打开
+2：split
+3:if
+4:sort
+
 

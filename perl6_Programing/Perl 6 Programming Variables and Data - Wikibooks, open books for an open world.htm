@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"><title>Perl 6 Programming/Variables and Data - Wikibooks, open books for an open world</title>
+<meta name="generator" content="MediaWiki 1.23wmf7">
+<link rel="alternate" type="application/x-wiki" title="Edit" href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit">
+<link rel="edit" title="Edit" href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit">
+<link rel="shortcut icon" href="http://bits.wikimedia.org/favicon/wikibooks.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="http://en.wikibooks.org/w/opensearch_desc.php" title="Wikibooks (en)">
+<link rel="EditURI" type="application/rsd+xml" href="http://en.wikibooks.org/w/api.php?action=rsd">
+<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/">
+<link rel="alternate" type="application/atom+xml" title="Wikibooks Atom feed" href="http://en.wikibooks.org/w/index.php?title=Special:RecentChanges&feed=atom">
+<link rel="canonical" href="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/Perl 6 Programming Variables and Data - Wikibooks, open books for an open world.htm">
+<link rel="stylesheet" href="http://bits.wikimedia.org/en.wikibooks.org/load.php?debug=false&lang=en&modules=ext.flaggedRevs.basic%7Cext.gadget.extlinks%7Cext.geshi.local%7Cext.uls.nojs%7Cext.wikihiero%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmw.PopUpMediaTransform%7Cskins.vector&only=styles&skin=vector&*">
+<style>
+@media print{#centralNotice{display:none}}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:ddb0c98a055632ae8e349c9cf48ac703 */
+.tipsy{padding:5px;position:absolute;z-index:100000;cursor:default}.tipsy-inner{padding:5px 8px 4px 8px; background-color:#ffffff;border:solid 1px #a7d7f9;color:black;max-width:15em;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px; }.tipsy-arrow{position:absolute;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAgMAAADUwp+1AAAACVBMVEX5+fmn1/n///9s6BFKAAAAAXRSTlMAQObYZgAAACpJREFUCB1jZBD4wMiQMoeRcUU4I9uSaYxSE54xZjn8AtMgPkgcJA9UBwAeDw1Qrb3pVAAAAABJRU5ErkJggg==) no-repeat top left;background:url(//bits.wikimedia.org/static-1.23wmf7/resources/jquery.tipsy/images/tipsy.png?2013-12-12T12:58:20Z) no-repeat top left!ie;width:11px;height:6px} .tipsy-n .tipsy-arrow{top:0px;left:50%;margin-left:-5px} .tipsy-nw .tipsy-arrow{top:1px;left:10px} .tipsy-ne .tipsy-arrow{top:1px;right:10px} .tipsy-s .tipsy-arrow{bottom:0px;left:50%;margin-left:-5px;background-position:bottom left} .tipsy-sw .tipsy-arrow{bottom:0px;left:10px;background-position:bottom left} .tipsy-se .tipsy-arrow{bottom:0px;right:10px;background-position:bottom left} .tipsy-e .tipsy-arrow{top:50%;margin-top:-5px;right:1px;width:5px;height:11px;background-position:top right} .tipsy-w .tipsy-arrow{top:50%;margin-top:-5px;left:0px;width:6px;height:11px}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:4148c4298073c0aa29053bf1c42f4042 */
+@-webkit-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-webkit-transform:translateY(-20px)}100%{opacity:1;-webkit-transform:translateY(0)}}@-moz-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-moz-transform:translateY(-20px)}100%{opacity:1;-moz-transform:translateY(0)}}@-o-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-o-transform:translateY(-20px)}100%{opacity:1;-o-transform:translateY(0)}}@keyframes centralAuthPPersonalAnimation{0%{opacity:0;transform:translateY(-20px)}100%{opacity:1;transform:translateY(0)}}.centralAuthPPersonalAnimation{-webkit-animation-duration:1s;-moz-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-name:centralAuthPPersonalAnimation;-moz-animation-name:centralAuthPPersonalAnimation;-o-animation-name:centralAuthPPersonalAnimation;animation-name:centralAuthPPersonalAnimation}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:0dcacc990dd02e7db9669ab3090b80f1 */
+.uls-trigger{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAQCAMAAADQzfSkAAABqlBMVEX////f3/+Ov+/n5+fp6enp6eno6Ojp6enn5+ff39/q6urp6enp6enp6enq6urp6en////q6urr6+upv+rU1NTJycnR0dEaGhrp6enT4/SEuuK9vb3l5eU2ktCxsbFdXV1paWmzwc9ITFDo6OhaWlpsbGxtbW2BipSZpK/X19d2dnZ8hI2/v79PT09gZm2CgoLIyMjD0eGksL1JTVHM2+spKywnKCkcHBzAzt3I1+cxMzZxcXFkZGSvr69WW2C8vLyFjphqcXiLlZ8dHh4gISLa2trQ3/Dc3NzZ2dl7e3uioqIfHyBCRko9QEPh4eFgYGDGxsZoaGiPj4/Ly8uRm6a6yNcbGxuSnKfL2uqVn6scHR20tLR/f3+Kioq4uLienp54gIipqanA2e+71u9GSk5yeoKgoKCAgIB0dHRLS0tlZWWDg4PBwcHFxcWxvsxkanGapbCKlJ7O4fNXo9hQn9bM3/OPmaRfZWve3t6mpqbR0dG+vr6JiYnKyspPVFl1s99+fn5srdzm5ubNzc1BREh2s99xsN7S0tIxMzUiIyQ2OTt/iJFwcHBbYWc3S28lAAAAF3RSTlMACBAg7P3LiTYIX6LmmDzeAYMnDN+1MJx17ncAAAEQSURBVHheddBTb0VREIbhVduYWVuHRm3btm3bNv9zJ2v3IE36Xk3yZG4+xkMKw0BREYwJMzkcO38MY37tG6AmYN48YZFxwsbeiys6y/02rT1Wa4TxwoYgpx4adLMbfRubs9tk0cJuYK8ACv1/Xy5LLlIYS5bf2FTUUlJapptiqKwyuOfJEsjq4M3j+YBPYc02X6utTWnvQEwk6wJRNxn29Pb1D2iIg0bEJMaHYWTU6RyfABPZ5BTa7xBxxo2YzPgcPPGFRb4Ey2Qrq2vrXlRk6xampDK+a94/ODw6PjGfkp2dX1y6ZOvVNWKavsutqt6HbGZ5QCqdMUmSnlXqhY6M12CZtKcaUnhtsKz/Tc5m7AfjN0jzWIipawAAAABJRU5ErkJggg==) no-repeat scroll left center;background:transparent url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../../lib/jquery.uls/images/icon-language.png?2013-12-12T13:03:20Z) no-repeat scroll left center!ie;background-image:-webkit-linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../../lib/jquery.uls/images/icon-language.svg?2013-12-12T13:03:20Z);background-image:-moz-linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../../lib/jquery.uls/images/icon-language.svg?2013-12-12T13:03:20Z);background-image:linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../../lib/jquery.uls/images/icon-language.svg?2013-12-12T13:03:20Z);padding-left:30px}#pt-uls a.uls-trigger{padding-left:30px}#p-lang .uls-settings-trigger{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAgCAMAAAAVMLmlAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAALpQTFRF////W1tbgICAWVlZgICAUVFRgICAWVlZhYWFUlJShYWFVFRUgYGBVVVVgYGBVVVVgICAVFRUVVVVVlZWgYGBgICAVFRUgYGBVFRUgICAgYGBVVVVVVVVgYGBVlZWgYGBVFRUgICAVFRUgICAVVVVgICAVlZWgICAVFRUgICAVVVVgICAVFRUgICAVlZWgICAVVVVgICAVVVVgICAVVVVgICAVVVVgICAVVVVgICAVVVVgICAVVVVgICA9Fa9bgAAADx0Uk5TAA4OFBQWFhcXGRlJSUtLWlpbXV9fYGFhZGRlZmlpa2twcIiIioqPj5GRn5+goKGh6+vv7/Dw+fn8/P7+YuRUVgAAAOlJREFUGBmNwcdWAgEURMFLFCUaAcWAEhQYHBRmCN3//1u+BYcVC6s4p2U3OLrrVxN7Xn7uELoH5w65Dx1g6JNnoLazfz++VnZehkZir4pQ3NjzBg5TwtgBhzFh6kDr294UobiykxZc7ezVdLyx8yrw6pM+8GjnDjsf7gj3/WpiJ7Vhl6OW3eC/mlKdo5teZSHNSoM24XqvTCHTvg0MdDIASpn08/6ZSlkJ6jMpLUBhLc3qKEwIIwUURoSJAs2ltC5AIZUWTbjcSulktJayCvCikx7wJG0VttrfEp5eLpfS4uLtgaOmVOeMP8BAM9RClMO9AAAAAElFTkSuQmCC) no-repeat right top;background:transparent url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/cog-sprite.png?2013-12-12T13:03:20Z) no-repeat right top!ie;background-image:-webkit-linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/cog-sprite.svg?2013-12-12T13:03:20Z);background-image:-moz-linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/cog-sprite.svg?2013-12-12T13:03:20Z);background-image:linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/cog-sprite.svg?2013-12-12T13:03:20Z);height:16px;width:14px;float:right;cursor:pointer}.skin-vector #p-lang .uls-settings-trigger{ margin-top:3px}#p-lang .uls-settings-trigger:hover{background-position:right -16px}   x:-o-prefocus,body.rtl li#pt-uls{ direction:ltr}#settings-block{border-top:1px solid #C9C9C9;background:#f8f8f8;background:-webkit-gradient(linear,left top,left bottom,from(#FBFBFB),to(#F0F0F0));background:-webkit-linear-gradient(top,#FBFBFB,#F0F0F0);background:-moz-linear-gradient(top,#FBFBFB,#F0F0F0);background:-o-linear-gradient(top,#FBFBFB,#F0F0F0);background:linear-gradient(#FBFBFB,#F0F0F0);padding-left:10px;line-height:1.2em;-webkit-border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px}.uls-menu a{cursor:pointer}.uls-menu.callout .caret-before{border-top:20px solid transparent;border-right:20px solid #AAA;border-bottom:20px solid transparent;display:inline-block;left:-21px;top:30px;position:absolute}.uls-menu.callout .caret-after{border-top:20px solid transparent;border-right:20px solid #FCFCFC;border-bottom:20px solid transparent;display:inline-block;left:-20px;top:30px;position:absolute}#settings-block div.display-settings-block,#settings-block div.input-settings-block{display:inline-block;margin:8px 15px;color:#565656}#settings-block div.display-settings-block:hover,#settings-block div.input-settings-block:hover{color:#252525}.uls-ui-languages button{width:23%;text-overflow:ellipsis;margin-right:4%}button.uls-more-languages{width:auto}.settings-title{font-size:11pt}.settings-text{color:#555555;font-size:9pt}div.display-settings-block:hover .settings-text{color:#252525} .ime-perime-help{display:none}.ime-checked .ime-perime-help{display:inline-block;width:20px;height:100%;position:absolute;top:0;bottom:0;right:0;opacity:0.75;padding:0;background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAFdQTFRF////AAAAZmZmVVVVSUlJW1tbVVVVV1dXWFhYVVVVV1dXVlZWWFhYV1dXWFhYVlZWV1dXVlZWV1dXV1dXWFhYV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXrNxhuAAAABx0Uk5TAAEFBgcOJCkxNlVla3KDi5WrsrbJ09ny9vf9/uWqFuIAAACESURBVBjTdZDBDsIgEERHai2KUqmllfr+/zs9AFYTnMsmL7uTmZX+yVjnrPkCnU8AyXeVDJGiOJSdCLzmsAIx73ngeZKOC+AlySSA8LjrCiQjyRafmzyAleQymQ7nFcDt6NItVFQOp5Cn/dgzjlDts+vW9xs1RI7KPLNHbRRq1W4951dvPF4RAFiSul8AAAAASUVORK5CYII=) left center no-repeat;background:transparent url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/help.png?2013-12-12T13:03:20Z) left center no-repeat!ie;background-image:-webkit-linear-gradient(transparent,transparent),url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB2ZXJzaW9uPSIxLjEiCiAgIHdpZHRoPSIxOCIKICAgaGVpZ2h0PSIxOCIKICAgdmlld0JveD0iMCAwIDE4IDE4LjAwMDAwMSIKICAgaWQ9IkxheWVyXzEiCiAgIHhtbDpzcGFjZT0icHJlc2VydmUiPjxtZXRhZGF0YQogICBpZD0ibWV0YWRhdGE5Ij48cmRmOlJERj48Y2M6V29yawogICAgICAgcmRmOmFib3V0PSIiPjxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PjxkYzp0eXBlCiAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+PGRjOnRpdGxlPjwvZGM6dGl0bGU+PC9jYzpXb3JrPjwvcmRmOlJERj48L21ldGFkYXRhPjxkZWZzCiAgIGlkPSJkZWZzNyIgLz4KPHBhdGgKICAgZD0ibSA5LjAwMDAwMDMsMS40OTk2NDM3IGMgLTQuMTQxNDE5MSwwIC03LjUwMDAwMDQsMy4zNTc4NjkgLTcuNTAwMDAwNCw3LjUwMDAwMTQgMCw0LjE0MjEzMDkgMy4zNTg1ODEzLDcuNTAwNzExOSA3LjUwMDAwMDQsNy41MDA3MTE5IEMgMTMuMTQyODQ0LDE2LjUwMDM1NyAxNi41LDEzLjE0MTc3NiAxNi41LDguOTk5NjQ1MSAxNi41LDQuODU3NTEyNyAxMy4xNDM1NTYsMS40OTk2NDM3IDkuMDAwMDAwMywxLjQ5OTY0MzcgeiBtIC0wLjAwMTQyLDExLjk0MzQ0MjMgYyAtMC42MTMzMDYyLDAgLTEuMDY3MDUzLC0wLjQ5MDA3NCAtMS4wNjcwNTMsLTEuMDc5ODc0IDAsLTAuNjE0MDE4IDAuNDUzNzQ2OCwtMS4wOTI2OTcgMS4wNjcwNTMsLTEuMDkyNjk3IDAuNTg5Nzk5NSwwIDEuMDY4NDc4NywwLjQ3ODY3OSAxLjA2ODQ3ODcsMS4wOTI2OTcgMCwwLjU4OTA4NyAtMC40Nzg2NzkyLDEuMDc5ODc0IC0xLjA2ODQ3ODcsMS4wNzk4NzQgeiBNIDEwLjUyMDgwOCw4LjgwNDQ3MDIgQyAxMC4wMDU4MDMsOS4yMDkwNjY4IDkuODA4NDg5Myw5LjQ2NzYzODQgOS44MDg0ODkzLDEwLjA0MzE5MSBWIDEwLjM5OTM1IEggOC4yMzc4MTk1IFYgOS45Njk4MjI2IGMgMCwtMS4wODA1ODY2IDAuMzE5ODMxLC0xLjUyMTUxMyAwLjgyMjAxNTgsLTEuOTE0NzEzIDAuNTAzNjA5MywtMC4zOTMxOTkxIDAuODExMzMwNiwtMC42MDE5MDkxIDAuODExMzMwNiwtMS4xNjYwNjQ4IDAsLTAuNDc4Njc4MSAtMC4yOTQ5LC0wLjc0ODY0NjcgLTAuODgzMjc0OCwtMC43NDg2NDY3IC0wLjUwMzYwOTQsMCAtMC45NDU5NTkxLDAuMTM0NjI4MSAtMS40MTE4MTUzLDAuNDU0NDU5MiBMIDYuODI3NDI5MSw1LjMwNzY5NzggQyA3LjQ0MDczNTMsNC44Nzc0NTc1IDguMjAyMjAzNiw0LjU3MTE2MDcgOS4yMDc5OTY5LDQuNTcxMTYwNyBjIDEuMzYxOTUzMSwwIDIuNTA0NTEyMSwwLjc0ODY0NjUgMi41MDQ1MTIxLDIuMTgzOTY4MiAtNy4xMmUtNCwxLjAxODYxNDkgLTAuNTY1NTgsMS41NTg1NTI1IC0xLjE5MTcwOSwyLjA0OTM0MTMgeiIKICAgaWQ9InBhdGgzIgogICBzdHlsZT0iZmlsbDojNTc1NzU3IiAvPgo8L3N2Zz4=);background-image:-webkit-linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/help.svg?2013-12-12T13:03:20Z)!ie;background-image:linear-gradient(transparent,transparent),url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB2ZXJzaW9uPSIxLjEiCiAgIHdpZHRoPSIxOCIKICAgaGVpZ2h0PSIxOCIKICAgdmlld0JveD0iMCAwIDE4IDE4LjAwMDAwMSIKICAgaWQ9IkxheWVyXzEiCiAgIHhtbDpzcGFjZT0icHJlc2VydmUiPjxtZXRhZGF0YQogICBpZD0ibWV0YWRhdGE5Ij48cmRmOlJERj48Y2M6V29yawogICAgICAgcmRmOmFib3V0PSIiPjxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PjxkYzp0eXBlCiAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+PGRjOnRpdGxlPjwvZGM6dGl0bGU+PC9jYzpXb3JrPjwvcmRmOlJERj48L21ldGFkYXRhPjxkZWZzCiAgIGlkPSJkZWZzNyIgLz4KPHBhdGgKICAgZD0ibSA5LjAwMDAwMDMsMS40OTk2NDM3IGMgLTQuMTQxNDE5MSwwIC03LjUwMDAwMDQsMy4zNTc4NjkgLTcuNTAwMDAwNCw3LjUwMDAwMTQgMCw0LjE0MjEzMDkgMy4zNTg1ODEzLDcuNTAwNzExOSA3LjUwMDAwMDQsNy41MDA3MTE5IEMgMTMuMTQyODQ0LDE2LjUwMDM1NyAxNi41LDEzLjE0MTc3NiAxNi41LDguOTk5NjQ1MSAxNi41LDQuODU3NTEyNyAxMy4xNDM1NTYsMS40OTk2NDM3IDkuMDAwMDAwMywxLjQ5OTY0MzcgeiBtIC0wLjAwMTQyLDExLjk0MzQ0MjMgYyAtMC42MTMzMDYyLDAgLTEuMDY3MDUzLC0wLjQ5MDA3NCAtMS4wNjcwNTMsLTEuMDc5ODc0IDAsLTAuNjE0MDE4IDAuNDUzNzQ2OCwtMS4wOTI2OTcgMS4wNjcwNTMsLTEuMDkyNjk3IDAuNTg5Nzk5NSwwIDEuMDY4NDc4NywwLjQ3ODY3OSAxLjA2ODQ3ODcsMS4wOTI2OTcgMCwwLjU4OTA4NyAtMC40Nzg2NzkyLDEuMDc5ODc0IC0xLjA2ODQ3ODcsMS4wNzk4NzQgeiBNIDEwLjUyMDgwOCw4LjgwNDQ3MDIgQyAxMC4wMDU4MDMsOS4yMDkwNjY4IDkuODA4NDg5Myw5LjQ2NzYzODQgOS44MDg0ODkzLDEwLjA0MzE5MSBWIDEwLjM5OTM1IEggOC4yMzc4MTk1IFYgOS45Njk4MjI2IGMgMCwtMS4wODA1ODY2IDAuMzE5ODMxLC0xLjUyMTUxMyAwLjgyMjAxNTgsLTEuOTE0NzEzIDAuNTAzNjA5MywtMC4zOTMxOTkxIDAuODExMzMwNiwtMC42MDE5MDkxIDAuODExMzMwNiwtMS4xNjYwNjQ4IDAsLTAuNDc4Njc4MSAtMC4yOTQ5LC0wLjc0ODY0NjcgLTAuODgzMjc0OCwtMC43NDg2NDY3IC0wLjUwMzYwOTQsMCAtMC45NDU5NTkxLDAuMTM0NjI4MSAtMS40MTE4MTUzLDAuNDU0NDU5MiBMIDYuODI3NDI5MSw1LjMwNzY5NzggQyA3LjQ0MDczNTMsNC44Nzc0NTc1IDguMjAyMjAzNiw0LjU3MTE2MDcgOS4yMDc5OTY5LDQuNTcxMTYwNyBjIDEuMzYxOTUzMSwwIDIuNTA0NTEyMSwwLjc0ODY0NjUgMi41MDQ1MTIxLDIuMTgzOTY4MiAtNy4xMmUtNCwxLjAxODYxNDkgLTAuNTY1NTgsMS41NTg1NTI1IC0xLjE5MTcwOSwyLjA0OTM0MTMgeiIKICAgaWQ9InBhdGgzIgogICBzdHlsZT0iZmlsbDojNTc1NzU3IiAvPgo8L3N2Zz4=);background-image:linear-gradient(transparent,transparent),url(//bits.wikimedia.org/static-1.23wmf7/extensions/UniversalLanguageSelector/resources/css/../images/help.svg?2013-12-12T13:03:20Z)!ie}.ime-checked .ime-perime-help:hover{opacity:1}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:21d87954c3f0d30dbfcce1af2b4e6335 */
+#p-lang li.interlanguage-link,.autonym{ font-family:'Autonym',sans-serif}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:ddc946d0b392bcbc2c1fb86246818001 */</style><style>
+.mw-collapsible-toggle{float:right} caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:a69d6f9ef6a7fa7065c5da3b52c08eb2 */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.autoellipsis-matched,.highlight{font-weight:bold}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:9780324491b653a3780e2d029bdc140c */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(//bits.wikimedia.org/static-1.23wmf7/resources/mediawiki.action/images/green-checkmark.png?2013-12-12T12:58:20Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:ee2f40b060a816b2f457766d3e12eeb9 */
+#container{position:relative;min-height:100%}#container,video{width:100%;height:100%}#playerContainer{overflow:hidden;position:relative;height:100%;background:#000}#videoHolder{position:relative;overflow:hidden}.fullscreen #playerContainer{position:absolute !important;width:100% !important;height:100%! important;z-index:9999;min-height:100%;top:0;left:0;margin:0}.mwEmbedPlayer{width:100%;height:100%;overflow:hidden;position:absolute;top:0;left:0}.modal_editor{ left:10px;top:10px;right:10px;bottom:10px;position:fixed;z-index:100}.displayHTML a:visited{color:white}.loadingSpinner{width:32px;height:32px;display:block;padding:0px;background-image:url(//bits.wikimedia.org/static-1.23wmf7/extensions/MwEmbedSupport/MwEmbedModules/MwEmbedSupport/skins/common/images/loading_ani.gif?2013-12-12T13:01:40Z)}.mw-imported-resource{border:thin solid black}.kaltura-icon{background-image:url(//bits.wikimedia.org/static-1.23wmf7/extensions/MwEmbedSupport/MwEmbedModules/MwEmbedSupport/skins/common/images/kaltura_logo_sm_transparent.png?2013-12-12T13:01:40Z) !important;background-repeat:no-repeat;display:block;height:12px;width:12px;margin-top:2px !important;margin-left:3px !important}.mw-fullscreen-overlay{background:rgb(0,0,0) none repeat scroll 0% 0%;position:fixed;top:0pt;left:0pt;width:100%;height:100%;-moz-background-clip:border;-moz-background-origin:padding;-moz-background-inline-policy:continuous} .play-btn-large{width:70px;height:53px;background :url(//bits.wikimedia.org/static-1.23wmf7/extensions/MwEmbedSupport/MwEmbedModules/MwEmbedSupport/skins/common/images/player_big_play_button.png?2013-12-12T13:01:40Z);position :absolute;cursor :pointer;border :none !important;z-index :1}.play-btn-large:hover{background :url(//bits.wikimedia.org/static-1.23wmf7/extensions/MwEmbedSupport/MwEmbedModules/MwEmbedSupport/skins/common/images/player_big_play_button_hover.png?2013-12-12T13:01:40Z)}.carouselContainer{position :absolute;width :100%;z-index :2}.carouselVideoTitle{position :absolute;top :0px;left :0px;width :100%;background :rgba(0,0,0,0.8);color :white;font-size :small;font-weight :bold;z-index :2}.carouselVideoTitleText{display :block;padding :10px 10px 10px 20px}.carouselTitleDuration{position :absolute;top :0px;right :0px;padding :2px;background-color :#5A5A5A;color :#D9D9D9;font-size :smaller;z-index :2}.carouselImgTitle{position :absolute;width :100%;text-align :center;color :white;font-size :small;background :rgba(0,0,0,0.4)}.carouselImgDuration{position :absolute;top :2px;left :2px;background :rgba( 0,0,0,0.7 );color :white;padding :1px 6px;font-size :small}.carouselPrevButton,.carouselNextButton{display :block;position :absolute;bottom:23px}.carouselPrevButton{left :5px}.carouselNextButton{right:6px}.alert-container{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;background-image:linear-gradient(bottom,rgb(215,215,215) 4%,rgb(230,230,230) 55%,rgb(255,255,255) 100%);background-image:-o-linear-gradient(bottom,rgb(215,215,215) 4%,rgb(230,230,230) 55%,rgb(255,255,255) 100%);background-image:-moz-linear-gradient(bottom,rgb(215,215,215) 4%,rgb(230,230,230) 55%,rgb(255,255,255) 100%);background-image:-webkit-linear-gradient(bottom,rgb(215,215,215) 4%,rgb(230,230,230) 55%,rgb(255,255,255) 100%);background-image:-ms-linear-gradient(bottom,rgb(215,215,215) 4%,rgb(230,230,230) 55%,rgb(255,255,255) 100%);background-image:-webkit-gradient(linear,left bottom,left top,color-stop(0.04,rgb(215,215,215)),color-stop(0.55,rgb(230,230,230)),color-stop(1,rgb(255,255,255)));margin:auto;position:absolute;top:0;left:0;right:0;bottom:0;max-width:80%;max-height:30%}.alert-title{background-color :#E6E6E6;padding :5px;border-bottom :1px solid #D1D1D1;font-weight :normal !important;font-size:14px !important;-webkit-border-top-left-radius:3px;-moz-border-radius-topleft:3px;border-top-left-radius:3px;-webkit-border-top-right-radius:3px;-moz-border-radius-topright:3px;border-top-right-radius:3px }.alert-message{padding :5px;font-weight :normal !important;text-align:center;font-size:14px !important}.alert-buttons-container{text-align:center;padding-bottom:5px}.alert-button{background-color:#474747;color:white;-webkit-border-radius:.5em;-moz-border-radius:.5em;border-radius:.5em;padding:2px 10px;background-image:linear-gradient(bottom,rgb(25,25,25) 4%,rgb(47,47,47) 55%,rgb(71,71,71) 68%);background-image:-o-linear-gradient(bottom,rgb(25,25,25) 4%,rgb(47,47,47) 55%,rgb(71,71,71) 68%);background-image:-moz-linear-gradient(bottom,rgb(25,25,25) 4%,rgb(47,47,47) 55%,rgb(71,71,71) 68%);background-image:-webkit-linear-gradient(bottom,rgb(25,25,25) 4%,rgb(47,47,47) 55%,rgb(71,71,71) 68%);background-image:-ms-linear-gradient(bottom,rgb(25,25,25) 4%,rgb(47,47,47) 55%,rgb(71,71,71) 68%);background-image:-webkit-gradient( linear,left bottom,left top,color-stop(0.04,rgb(25,25,25)),color-stop(0.55,rgb(47,47,47)),color-stop(0.68,rgb(71,71,71)) )}.alert-text{color :black !important}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:d954d7543c11c2cfbc5ff88589065998 */
+.PopUpMediaTransform a .play-btn-large{position :absolute;top:50%;left :50%;width:70px;height:53px;margin-left:-35px;margin-top:-25px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAA1CAMAAADLRm3ZAAABnlBMVEUAAAAAAAAAAABaWlp4eHh7e3t/f393d3eDg4N0dHRtbW2FhYVra2uJiYmNjY1nZ2eRkZFkZGSUlJRiYmKYmJhgYGCcnJxeXl5cXFyfn58AAACioqKlpaWsrKwAAACpqakAAAAAAAAAAAAAAABEREQFBQUHBwdMTEwAAAAYGBgAAAAAAAABAQEXFxcAAAAAAAAAAABxcXGoqKh3d3eampp8fHyIiIgUFBQcHBw0NDSFhYV+fn5FRUUmJiaNjY11dXWPj4+Hh4c9PT14eHifn59nZ2eBgYFISEiBgYFubm5vb28ODg4lJSVra2tiYmJoaGgEBAQmJiZmZmaLi4saGhpiYmKYmJhZWVlgYGBfX19vb29DQ0MGBgZcXFyBgYFKSkoPDw9ZWVlzc3NQUFBXV1eKiopUVFQdHR1VVVUQEBBYWFglJSVTU1NXV1cKCgosLCySkpJRUVFISEgyMjJPT08dHR2GhoY4ODhNTU09PT0MDAwuLi57e3sTExNJSUkgICBOTk4hISEbGxtTU1MoKChBQUEsLCxXV1cAAABycnIdNM6eAAAAinRSTlOzj6jO1dbX1NfU09nS2drR29Hc0N3Q3c/O3gDf3+Ce4EgIGW7HtbXKnLouq7S5cHIq1ODQ3NTXuLq/1tXEvNjT2NjC093N18bW0dC2vNHM0LW90Ne5z9rLzsrTxbXN1Me3zdDKzdfLu8y3zb3Lyba/2svFwcq618PKxLa/1LjJu8q8u8y+xsDKrdJqj5XQAAABYklEQVR4Xu3XVVNCQRjH4VdQEbvFVRAOIRl2d3d3d3d317d2GEaGOOfM1oUXPB/gN7NX/30BIYPeGMPAqDcgBMhrBUZWLwJBAcwcAriBAzfogAMdKIADBUUmmqm64JAxl2m1k/XMmZkin+YaxsxYqd9iA1OmsfDPajVDZqMgoL1jhzpTmR+k/OCQMlObG+L4dJgq050d5rKVJlOXGaHijjxzny6i94k005YqatBFlmlKEdfy1UeS+UmS0tllwc/0JEhT9WNnBuJlqCy4maE4OSO4mdFYOeO4mQm1jCnAzUyXSJqdm8fOLCRKWVomWIaVZHFrLqJlWE8Ts7lFuAzbGZF294iXYT8rnPLICcSZk5xQyjMzzTKc5wXTXFnoluFaE+TmlnYZipUBpgcA5syjjWU1Tf7I8wvbhr/6Im/vTmDLgO3D9Gn+R5+2aIbXzeABDjwgOIDZtwDIzvwsnR1xujV/AS6zSfMs2bS9AAAAAElFTkSuQmCC);background-image:url(//bits.wikimedia.org/static-1.23wmf7/extensions/TimedMediaHandler/resources/player_big_play_button.png?2013-12-12T13:03:20Z)!ie}.PopUpMediaTransform a .play-btn-large :hover{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAA1CAMAAADLRm3ZAAABtlBMVEUAAAAAAAAAAAC5ubm1tbWwsLC+vr6Li4vExMSrq6umpqbIyMjOzs6ioqLT09OdnZ3Y2NiZmZnc3NyWlpbh4eGSkpLn5+eQkJCNjY0AAADr6+vv7+/z8/P39/cAAAD9/f0AAAAAAAAAAAAAAAB2dnYAAAAoKCj5+flra2sMDAwAAAAAAAAAAAAAAAAAAAACAgLW1tbPz88wMDCHh4fExMS8vLxKSkpubm6vr6+qqqo0NDQQEBDCwsK1tbUmJiaysrLT09PLy8uIiIgXFxetra2+vr7r6+tycnIbGxvMzMyTk5O1tbU8PDyjo6PR0dG0tLQLCwufn58HBwc9PT2bm5shISEqKiqXl5cICAiJiYmTk5Pj4+OoqKhpaWkKCgqOjo5TU1OXl5cYGBiKioo9PT18fHwlJSWGhoYuLi6CgoIvLy+Dg4Ofn5+oqKg7OzuAgIDk5OSLi4tHR0fIyMh9fX3Z2dlycnJPT08JCQl7e3vJyclhYWFZWVl4eHhhYWEUFBS6urpqamofHx9ycnK2trZzc3N6eno1NTUsLCyKioqAgIBBQUFmZmZHR0cICAjBwcEAAACIiIg+YVJpAAAAknRSTlOzj6jt6+ru4O/p5/Hy5vPl9eT24/ji+eHgAPr7/P2e/hlICG7YLr7+07accipwq7Tw777X6erGzuLjv7fs4rzn8PDYuObr+dK57tjqwuTu6rbjtcPiur3htdvg8+jRtt7H3Lndwdi83b7bwNze5cPb9t/G7drz0Mq22e7MzdjPuOrUu9fo1NnCwN/cxdLItu6t3VahkKcAAAFlSURBVHhe7dfFcgJBFIbRGyLEXegIDBAITtzd3d3d3d3d88ZJigqFzExNyyILzgN8Vb36+wJCGrXWj4JWrUEIkMUElEwWBJwMqNk4sAIDVlACA0qQAQMygowv05fNIDNYplKNFFBnmjN+ZU5SZtrTHHJnqTKVqX8KFykyWSlO9auNxJmmZBebOSWEmZ1EN3v73USZ0ngPxyckmbpYL3n5+JnLaB5FxbiZ20heU+V4mYpwflXVNTiZ2jAhHw1G6Zm1YGEtrZIzbUEiOjqlZrr8xfRIzfQGiOmXmhkIFDEEUjPDIYJGx8YlZyZChdxNYyzDTAS/uXmsZViI4rO0jLkMKzHevtaxl2EjztPWth2wM7sJ7uQHhyTLcJTkSnFqJFuGM4WL8wvSZUiXO11dA1BnbvQ0q2lwRO4f6Db88ekn8vxiB7oM6F8Nb+//6NPmy7C6GczAgBk4G1D75ADpqJ+l1CFGt+Y3XGRJEJqP8KwAAAAASUVORK5CYII=);background-image:url(//bits.wikimedia.org/static-1.23wmf7/extensions/TimedMediaHandler/resources/player_big_play_button_hover.png?2013-12-12T13:03:20Z)!ie}.PopUpMediaTransform{position :relative;display:inline-block}li.gallerybox div.thumb div.PopUpMediaTransform{margin:0 auto}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:19b03d3f21bc1e95f5788199eefb0c66 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{text-decoration:none;color:black}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:52b1797f70c7e4094dfa4191101944e8 */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="http://bits.wikimedia.org/en.wikibooks.org/load.php?debug=false&lang=en&modules=site&only=styles&skin=vector&*">
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: enwikibooks:resourceloader:filter:minify-css:7:4969bf752d40e7c60e4c1bc8e4153549 */</style>
+
+<script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/load.php"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/load(1).php"></script><style title="spinjs"></style>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Perl_6_Programming/Variables_and_Data","wgTitle":"Perl 6 Programming/Variables and Data","wgCurRevisionId":1708290,"wgRevisionId":1708290,"wgArticleId":181505,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Perl 6 Programming"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Perl_6_Programming/Variables_and_Data","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"templateEditor":false,"templates":false,"preview":false,"previewDialog":false,"publish":false,"toc":false},"wgBetaFeaturesFeatures":[],"wgULSAcceptLanguageList":["zh-cn","zh","en"],"wgFlaggedRevsParams":{"tags":{"value":{"levels":3,"quality":2,"pristine":3}}},"wgStableRevisionId":1708290,"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","Geo":{"city":"","country":""},"wgNoticeProject":"wikibooks"});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"justify":0,"math":0,"minordefault":0,"newpageshidepatrolled":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":false,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":4,"underline":2,"uselivepreview":0,"usenewrc":0,"vector-simplesearch":1,"watchcreations":1,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,
+"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"useeditwarning":1,"prefershttps":1,"flaggedrevssimpleui":0,"flaggedrevsstable":0,"flaggedrevseditdiffs":true,"flaggedrevsviewdiffs":false,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"echo-notify-show-link":true,"echo-show-alert":true,"echo-email-frequency":0,"echo-email-format":"html","echo-subscriptions-email-system":true,"echo-subscriptions-web-system":true,"echo-subscriptions-email-other":false,"echo-subscriptions-web-other":true,"echo-subscriptions-email-edit-user-talk":false,"echo-subscriptions-web-edit-user-talk":true,"echo-subscriptions-email-reverted":false,"echo-subscriptions-web-reverted":true,"echo-subscriptions-email-article-linked":false,"echo-subscriptions-web-article-linked":false,"echo-subscriptions-email-mention":false,"echo-subscriptions-web-mention":true,"echo-subscriptions-web-edit-thank":true,"echo-subscriptions-email-edit-thank":false,"uls-preferences":"","language":
+"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":true,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs102":false,"searchNs103":false,"searchNs108":false,"searchNs109":false,"searchNs110":false,"searchNs111":false,"searchNs112":true,"searchNs113":false,"searchNs828":false,"searchNs829":false,"gadget-extlinks":1,"gadget-commons-file":1,"gadget-toolboxcompat":1,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: enwikibooks:resourceloader:filter:minify-js:7:654df7e16c6905f951b4f215c0323024 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","ext.centralauth.centralautologin","ext.uls.init","ext.uls.interface","ext.centralNotice.bannerController","skins.vector.js"]);
+}</script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/load(2).php"></script>
+<style type="text/css">/*<![CDATA[*/
+.source-c {line-height: normal;}
+.source-c li, .source-c pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for c
+ * CSS class: source-c, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.c.source-c .de1, .c.source-c .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;font-family: monospace, monospace;}
+.c.source-c  {font-family:monospace;}
+.c.source-c .imp {font-weight: bold; color: red;}
+.c.source-c li, .c.source-c .li1 {font-weight: normal; vertical-align:top;}
+.c.source-c .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.c.source-c .li2 {font-weight: bold; vertical-align:top;}
+.c.source-c .kw1 {color: #b1b100;}
+.c.source-c .kw2 {color: #000000; font-weight: bold;}
+.c.source-c .kw3 {color: #000066;}
+.c.source-c .kw4 {color: #993333;}
+.c.source-c .co1 {color: #666666; font-style: italic;}
+.c.source-c .co2 {color: #339933;}
+.c.source-c .coMULTI {color: #808080; font-style: italic;}
+.c.source-c .es0 {color: #000099; font-weight: bold;}
+.c.source-c .es1 {color: #000099; font-weight: bold;}
+.c.source-c .es2 {color: #660099; font-weight: bold;}
+.c.source-c .es3 {color: #660099; font-weight: bold;}
+.c.source-c .es4 {color: #660099; font-weight: bold;}
+.c.source-c .es5 {color: #006699; font-weight: bold;}
+.c.source-c .br0 {color: #009900;}
+.c.source-c .sy0 {color: #339933;}
+.c.source-c .st0 {color: #ff0000;}
+.c.source-c .nu0 {color: #0000dd;}
+.c.source-c .nu6 {color: #208080;}
+.c.source-c .nu8 {color: #208080;}
+.c.source-c .nu12 {color: #208080;}
+.c.source-c .nu16 {color:#800080;}
+.c.source-c .nu17 {color:#800080;}
+.c.source-c .nu18 {color:#800080;}
+.c.source-c .nu19 {color:#800080;}
+.c.source-c .me1 {color: #202020;}
+.c.source-c .me2 {color: #202020;}
+.c.source-c .ln-xtra, .c.source-c li.ln-xtra, .c.source-c div.ln-xtra {background-color: #ffc;}
+.c.source-c span.xtra { display:block; }
+
+/*]]>*/
+</style><style type="text/css">/*<![CDATA[*/
+.source-perl {line-height: normal;}
+.source-perl li, .source-perl pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for perl
+ * CSS class: source-perl, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.perl.source-perl .de1, .perl.source-perl .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;font-family: monospace, monospace;}
+.perl.source-perl  {font-family:monospace;}
+.perl.source-perl .imp {font-weight: bold; color: red;}
+.perl.source-perl li, .perl.source-perl .li1 {font-weight: normal; vertical-align:top;}
+.perl.source-perl .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.perl.source-perl .li2 {font-weight: bold; vertical-align:top;}
+.perl.source-perl .kw1 {color: #b1b100;}
+.perl.source-perl .kw2 {color: #000000; font-weight: bold;}
+.perl.source-perl .kw3 {color: #000066;}
+.perl.source-perl .co1 {color: #666666; font-style: italic;}
+.perl.source-perl .co2 {color: #009966; font-style: italic;}
+.perl.source-perl .co3 {color: #0000ff;}
+.perl.source-perl .co4 {color: #cc0000; font-style: italic;}
+.perl.source-perl .co5 {color: #0000ff;}
+.perl.source-perl .coMULTI {color: #666666; font-style: italic;}
+.perl.source-perl .es0 {color: #000099; font-weight: bold;}
+.perl.source-perl .es_h {color: #000099; font-weight: bold;}
+.perl.source-perl .br0 {color: #009900;}
+.perl.source-perl .sy0 {color: #339933;}
+.perl.source-perl .st0 {color: #ff0000;}
+.perl.source-perl .st_h {color: #ff0000;}
+.perl.source-perl .nu0 {color: #cc66cc;}
+.perl.source-perl .me1 {color: #006600;}
+.perl.source-perl .me2 {color: #006600;}
+.perl.source-perl .re0 {color: #0000ff;}
+.perl.source-perl .re4 {color: #009999;}
+.perl.source-perl .ln-xtra, .perl.source-perl li.ln-xtra, .perl.source-perl div.ln-xtra {background-color: #ffc;}
+.perl.source-perl span.xtra { display:block; }
+
+/*]]>*/
+</style><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/geoiplookup"></script><link rel="dns-prefetch" href="http://meta.wikimedia.org/"><!--[if lt IE 7]><style type="text/css">body{behavior:url("/w/static-1.23wmf7/skins/vector/csshover.min.htc")}</style><![endif]--><style>@font-face { font-family: 'Autonym';
+	src: url('https://bits.wikimedia.org/static-current/extensions/UniversalLanguageSelector/data/fontrepo/fonts/Autonym/Autonym.eot?version=20131205');
+	src: local('Autonym'),		url('https://bits.wikimedia.org/static-current/extensions/UniversalLanguageSelector/data/fontrepo/fonts/Autonym/Autonym.woff?version=20131205') format('woff'),		url('https://bits.wikimedia.org/static-current/extensions/UniversalLanguageSelector/data/fontrepo/fonts/Autonym/Autonym.ttf?version=20131205') format('truetype');
+	font-style: normal;}
+</style><script async="" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/load(3).php"></script><link rel="stylesheet" href="http://en.wikibooks.org/w/index.php?action=raw&ctype=text/css&title=MediaWiki:Common.css/Perl_6_Programming"><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index.php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(1).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(2).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(3).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(4).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(5).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(6).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(7).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(8).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(9).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(10).php" type="text/javascript"></script><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(11).php" type="text/javascript"></script><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style><link rel="stylesheet" href="http://en.wikibooks.org/w/index.php?action=raw&ctype=text/css&title=MediaWiki:Perbook/Perl_6_Programming.css"><script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(12).php" type="text/javascript"></script><style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Perl_6_Programming_Variables_and_Data skin-vector action-view vector-animateLayout">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<div id="siteNotice"><div id="centralNotice"></div><!-- CentralNotice --></div>
+						<h1 id="firstHeading" class="firstHeading" lang="en"><span dir="auto">Perl 6 Programming/Variables and Data</span></h1>
+			<div id="bodyContent">
+								<div id="siteSub">From Wikibooks, open books for an open world</div>
+								<div id="contentSub"><span class="subpages">&lt; <a href="http://en.wikibooks.org/wiki/Perl_6_Programming" title="Perl 6 Programming">Perl 6 Programming</a></span></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#mw-navigation">navigation</a>, 					<a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><center>
+<div class="PrettyTextBox noprint" style="width: 90%; clear: all; padding: 5px; margin: 5px auto;"><big><b><a href="http://en.wikibooks.org/wiki/Perl_6_Programming" title="Perl 6 Programming">Perl 6 Programming</a></b></big></div>
+</center>
+<p></p>
+<div id="toc" class="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+<span class="toctoggle">&nbsp;[<a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" class="internal" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Static_and_Dynamic_Programming_Languages"><span class="tocnumber">1</span> <span class="toctext">Static and Dynamic Programming Languages</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Variables_and_Sigils"><span class="tocnumber">2</span> <span class="toctext">Variables and Sigils</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Scalars"><span class="tocnumber">3</span> <span class="toctext">Scalars</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Arrays"><span class="tocnumber">4</span> <span class="toctext">Arrays</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Hashes"><span class="tocnumber">5</span> <span class="toctext">Hashes</span></a>
+<ul>
+<li class="toclevel-2 tocsection-6"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#Adverb_Syntax"><span class="tocnumber">5.1</span> <span class="toctext">Adverb Syntax</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#.24_The_Default_Variable"><span class="tocnumber">6</span> <span class="toctext">$_ The Default Variable</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Static_and_Dynamic_Programming_Languages">Static and Dynamic Programming Languages</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=1" title="Edit section: Static and Dynamic Programming Languages">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Perl 6 is one of a class of programming languages called <b>dynamic languages</b>. Dynamic languages use variables whose data type can change at runtime and don't need to be predeclared. The alternative to dynamic languages are static languages, such as <a href="http://en.wikibooks.org/wiki/C_Programming" title="C Programming">C</a> or <a href="http://en.wikibooks.org/wiki/Java_Programming" title="Java Programming">Java</a>, where variables must typically be declared as a specific data type before they are used.</p>
+<p>In a language like C or one of its derivatives (<a href="http://en.wikibooks.org/wiki/C%2B%2B_Programming" title="C++ Programming">C++</a>, <a href="http://en.wikibooks.org/wiki/C_Sharp_Programming" title="C Sharp Programming">C#</a> or <a href="http://en.wikibooks.org/wiki/Java_Programming" title="Java Programming">Java</a> for instance) variables need to be predeclared with a type before they can be used:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">unsigned</span> <span class="kw4">short</span> <span class="kw4">int</span> x<span class="sy0">;</span>
+x <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+</pre></div>
+</div>
+<p>The code above isn't entirely accurate since in C you can initialize a variable when you declare it:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">unsigned</span> <span class="kw4">short</span> <span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+</pre></div>
+</div>
+<p>However, the variable <code>x</code> cannot be used before it's declared. Once it's declared as the type <code>unsigned short int</code>, you can't use <code>x</code> to store other types of data like floating point numbers or data pointers, at least not without explicit coercion:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="c source-c">
+<pre class="de1"><span class="kw4">unsigned</span> <span class="kw4">short</span> <span class="kw4">int</span> x<span class="sy0">;</span>
+x <span class="sy0">=</span> <span class="nu16">1.02</span><span class="sy0">;</span>        <span class="coMULTI">/* Wrong! */</span>
+<span class="kw4">unsigned</span> <span class="kw4">short</span> <span class="kw4">int</span> y<span class="sy0">;</span>
+x <span class="sy0">=</span> <span class="sy0">&amp;</span>y<span class="sy0">;</span>          <span class="coMULTI">/* Wrong! */</span>
+</pre></div>
+</div>
+<p>In dynamic programming languages like Perl 6, variables can be automatically allocated when they are first used without having to be explicitly declared. Also, variables in Perl 6 are polymorphic: They can be integers, strings, floating point numbers, or complex data structures like arrays or hashes without any coercion. Here are some examples:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">$x</span><span class="sy0">;</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">;</span>           <span class="co1"># Integer</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="st0">"hello"</span><span class="sy0">;</span>     <span class="co1"># String</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">3.1415</span><span class="sy0">;</span>      <span class="co1"># Floating Point Number</span>
+</pre></div>
+</div>
+<div style="clear:both; width:90%; margin:5px auto; padding:0px;">
+<div class="PrettyTextBox" style="vertical-align:bottom; margin:0px 25px; padding:5px 20px;">
+<p>The example above demonstrates a number of different ideas that we will discuss throughout the rest of this book. One important idea is <b>Comments</b>. Comments are notes in the source code that are intended to be read by the programmers and are ignored by the Perl 6 interpreter. In Perl 6, most comments are marked with a <code>#</code> symbol, and continue until the end of the line. Perl 6 also has embedded comments and multi-line documentation, which we will talk about later.</p>
+</div>
+</div>
+<p>We haven't been entirely honest about Perl 6 data. Perl 6 does allow data to be given an explicit type, if you want it to. The default is to use data that is polymorphic like we've seen above, but you can also declare that a scalar may only hold an integer, or a string, or a number, or a different data item all together. We'll talk more about Perl 6's explicit type system later. For now, it's easier to think that data in Perl 6 doesn't have explicit types (or, more specifically, that it doesn't <i>need</i> them).</p>
+<p>The examples we see above also show an important keyword: <code>my</code>. <code>my</code> is used to declare a new variable for use. We'll talk more about <code>my</code> and its uses later.</p>
+<h2><span class="mw-headline" id="Variables_and_Sigils">Variables and Sigils</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=2" title="Edit section: Variables and Sigils">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>As we saw in the brief example above, Perl 6 variables have symbols in front of them called <b>sigils</b>. Sigils serve a number of important uses, but one of the most important is to establish <b>context</b>. Perl 6 has four types of sigils that are used to establish different types of data. The $ sign that we saw above is for <b>scalars</b>: single data values like numbers, strings, or object references. Other sigils to be used are @ which denotes arrays of data,&nbsp;% for hashes of data, and &amp; for subroutines or executable code blocks.</p>
+<dl>
+<dt>Scalars</dt>
+<dd>Scalars as we have already seen contain a single data item like a number or a string.</dd>
+<dt>Arrays</dt>
+<dd>Arrays are lists of data of the same type that are indexed by number.</dd>
+<dt>Hashes</dt>
+<dd>Hashes are sets of data of potentially different types of data indexed by a string name.</dd>
+<dt>Code References</dt>
+<dd>Code references are pointers to executable code structures that can be passed around like data and called at different places in your code.</dd>
+</dl>
+<h2><span class="mw-headline" id="Scalars">Scalars</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=3" title="Edit section: Scalars">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>We've seen some uses of scalars above, here we're going to show a slightly more comprehensive list.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">$x</span><span class="sy0">;</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">42</span><span class="sy0">;</span>             <span class="co1"># Decimal Integer</span>
+<span class="re0">$x</span> <span class="sy0">=</span> 0xF6<span class="sy0">;</span>           <span class="co1"># Hexadecimal Integer</span>
+<span class="re0">$x</span> <span class="sy0">=</span> 0b1010010001<span class="sy0">;</span>   <span class="co1"># Binary Integer</span>
+ 
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="nu0">3.1415</span><span class="sy0">;</span>         <span class="co1"># Floating Point Number</span>
+<span class="re0">$x</span> <span class="sy0">=</span> 2<span class="sy0">.</span>34E<span class="sy0">-</span>5<span class="sy0">;</span>        <span class="co1"># Scientific Notation</span>
+ 
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="st0">"Hello "</span><span class="sy0">;</span>       <span class="co1"># Double-Quoted String</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="st_h">'World!'</span><span class="sy0">;</span>       <span class="co1"># Single-Quoted String</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="kw3">q</span><span class="sy0">:</span>to<span class="st_h">'EOS'</span><span class="sy0">;</span>      <span class="co1"># Heredoc string</span>
+ 
+This is a heredoc string<span class="sy0">.</span> It starts at the <span class="st0">"q:to"</span>
+term <span class="kw1">and</span> continues <span class="kw1">until</span> we reach the terminator
+specified in quotes above<span class="sy0">.</span> This is useful <span class="kw1">for</span>
+large multi<span class="sy0">-</span>line string literals<span class="sy0">.</span> We will talk about
+heredocs in more detail later
+ 
+EOS
+ 
+<span class="re0">$x</span> <span class="sy0">=</span> MyObject<span class="sy0">.</span><span class="kw2">new</span><span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span> <span class="co1"># Object Reference</span>
+</pre></div>
+</div>
+<p>Scalars are the most fundamental and basic type of data in Perl 6 and are the ones that are probably going to be used most often in your programs. This is because they are so versatile.</p>
+<h2><span class="mw-headline" id="Arrays">Arrays</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=4" title="Edit section: Arrays">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Arrays, as we mentioned above, are lists of data objects that are considered to be the same type. Since arrays are lists of scalars, it's possible for some elements in an array to be numbers and some to be strings and some to be other data entirely. However, this is generally not considered to be the best use of arrays.</p>
+<p>Arrays are prefixed with the @ sigil, and can be indexed using integers in [ square brackets ]. Here are some examples of using arrays:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">@a</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="st0">"first"</span><span class="sy0">,</span> <span class="st0">"second"</span><span class="sy0">,</span> <span class="st0">"third"</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="nu0">1.2</span><span class="sy0">,</span> <span class="nu0">3.14</span><span class="sy0">,</span> <span class="nu0">2.717</span><span class="sy0">;</span>
+</pre></div>
+</div>
+<p>Once we have an array we can extract the scalar data items out of them using index notation:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">@a</span><span class="sy0">,</span> <span class="re0">$x</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="st0">"first"</span><span class="sy0">,</span> <span class="st0">"second"</span><span class="sy0">,</span> <span class="st0">"third"</span><span class="sy0">;</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="re0">@a</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span><span class="sy0">;</span>    <span class="co1"># first</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="re0">@a</span><span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span>    <span class="co1"># second</span>
+<span class="re0">$x</span> <span class="sy0">=</span> <span class="re0">@a</span><span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="sy0">;</span>    <span class="co1"># third</span>
+</pre></div>
+</div>
+<p>Arrays can also be multi-dimensional:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">@a</span><span class="sy0">;</span>
+<span class="re0">@a</span><span class="br0">[</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+<span class="re0">@a</span><span class="br0">[</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+<span class="re0">@a</span><span class="br0">[</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="re0">@a</span><span class="br0">[</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+ 
+<span class="co1"># @a is now:</span>
+<span class="co1">#       |1, 2|</span>
+<span class="co1">#       |3, 4|</span>
+</pre></div>
+</div>
+<p>Arrays also don't have to just store scalars, they can store any other data items as well:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">@a</span><span class="sy0">,</span> <span class="re0">@b</span><span class="sy0">,</span> <span class="re0">@c</span><span class="sy0">,</span> <span class="re0">@d</span><span class="sy0">,</span> <span class="re0">%e</span><span class="sy0">,</span> <span class="re0">%f</span><span class="sy0">,</span> <span class="re0">%g</span><span class="sy0">,</span> <span class="re0">&amp;h</span><span class="sy0">,</span> <span class="re0">&amp;i</span><span class="sy0">,</span> <span class="re0">&amp;j</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="re0">@b</span><span class="sy0">,</span> <span class="re0">@c</span><span class="sy0">,</span> <span class="re0">@d</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="re0">%e</span><span class="sy0">,</span> <span class="re0">%f</span><span class="sy0">,</span> <span class="re0">%g</span><span class="sy0">;</span>
+<span class="re0">@a</span> <span class="sy0">=</span> <span class="re0">&amp;h</span><span class="sy0">,</span> <span class="re0">&amp;i</span><span class="sy0">,</span> <span class="re0">&amp;j</span><span class="sy0">;</span>
+</pre></div>
+</div>
+<p>This can be the basis of some complex data structures, and we'll talk more about composing structures like this later.</p>
+<h2><span class="mw-headline" id="Hashes">Hashes</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=5" title="Edit section: Hashes">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Hashes are similar in many ways to arrays: They can contain a group of objects. However, unlike arrays hashes use names for their items instead of numbers. Here are some examples:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">%a</span> <span class="sy0">=</span> <span class="st0">"first"</span> <span class="sy0">=&gt;</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="st0">"second"</span> <span class="sy0">=&gt;</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="st0">"third"</span> <span class="sy0">=&gt;</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">my</span> <span class="re0">$x</span> <span class="sy0">=</span> <span class="re0">%a</span><span class="br0">{</span><span class="st0">"first"</span><span class="br0">}</span><span class="sy0">;</span>        <span class="co1"># 1</span>
+<span class="kw1">my</span> <span class="re0">$y</span> <span class="sy0">=</span> <span class="re0">%a</span><span class="br0">{</span><span class="st0">"second"</span><span class="br0">}</span><span class="sy0">;</span>       <span class="co1"># 2</span>
+<span class="kw1">my</span> <span class="re0">$z</span> <span class="sy0">=</span> <span class="re0">%a</span><span class="br0">{</span><span class="st0">"third"</span><span class="br0">}</span><span class="sy0">;</span>        <span class="co1"># 3</span>
+</pre></div>
+</div>
+<p>The special <code>=&gt;</code> symbol is similar to a comma except it creates a <b>pair</b>. A pair is a combination of a string name and an associated data object. Hashes can sometimes be thought of as being arrays of pairs. Notice also that hashes use curly brackets to index their data instead of square brackets like arrays use.</p>
+<p>Hashes can also use a special syntax called <b>autoquoting</b> to help make looking up hash values easier. Instead of using the curly brackets and quotes <code>{" "}</code>, you can use the angle brackets <code>&lt; &gt;</code> by themselves to do the same job:</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">%a</span> <span class="sy0">=</span> <span class="st0">"foo"</span> <span class="sy0">=&gt;</span> <span class="st0">"first"</span><span class="sy0">,</span> <span class="st0">"bar"</span> <span class="sy0">=&gt;</span> <span class="st0">"second"</span><span class="sy0">;</span>
+<span class="kw1">my</span> <span class="re0">$x</span> <span class="sy0">=</span> <span class="re0">%a</span><span class="br0">{</span><span class="st0">"foo"</span><span class="br0">}</span><span class="sy0">;</span>      <span class="co1"># "first"</span>
+<span class="kw1">my</span> <span class="re0">$y</span> <span class="sy0">=</span> <span class="re0">%a</span><span class="re4">&lt;bar&gt;</span>         <span class="co1"># "second"</span>
+</pre></div>
+</div>
+<h3><span class="mw-headline" id="Adverb_Syntax">Adverb Syntax</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=6" title="Edit section: Adverb Syntax">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Pairs in a hash can be defined in another way without using the <code>=&gt;</code> operator. Pairs can also be defined using <b>adverb syntax</b>. Adverb syntax is used throughout Perl 6 to provide named data values, so it's not just useful for hashes. Pairs of the form <code>"name" =&gt; data</code> can be written in adverb syntax as <code>:name(data)</code> instead.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="kw1">my</span> <span class="re0">%foo</span> <span class="sy0">=</span> <span class="st0">"first"</span> <span class="sy0">=&gt;</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="st0">"second"</span> <span class="sy0">=&gt;</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="st0">"third"</span> <span class="sy0">=&gt;</span> <span class="nu0">3</span><span class="sy0">;</span>
+<span class="kw1">my</span> <span class="re0">%bar</span> <span class="sy0">=</span> <span class="sy0">:</span>first<span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">,</span> <span class="sy0">:</span>second<span class="br0">(</span><span class="nu0">2</span><span class="br0">)</span><span class="sy0">,</span> <span class="sy0">:</span>third<span class="br0">(</span><span class="nu0">3</span><span class="br0">)</span><span class="sy0">;</span>       <span class="co1"># Same!</span>
+</pre></div>
+</div>
+<p>We're going to see many uses for adverbs throughout Perl 6, so it's important to learn about them now.</p>
+<h2><span class="mw-headline" id=".24_The_Default_Variable"><code>$_</code> The Default Variable</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit&section=7" title="Edit section: $ The Default Variable">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Perl 6 uses the special variable <code>$_</code> as a special default variable. <code>$_</code> receives values when no other variables are provided, and is used by methods if they start with a dot. <code>$_</code> can be used explicitly by name or implicitly.</p>
+<div dir="ltr" class="mw-geshi mw-code mw-content-ltr">
+<div class="perl source-perl">
+<pre class="de1"><span class="co5">$_</span> <span class="sy0">=</span> <span class="st0">"Hello "</span><span class="sy0">;</span>
+<span class="sy0">.</span><span class="kw3">print</span><span class="sy0">;</span>           <span class="co1"># Call method 'print' on $_</span>
+<span class="co5">$_</span><span class="sy0">.</span><span class="kw3">print</span><span class="sy0">;</span>         <span class="co1"># Same</span>
+<span class="kw3">print</span> <span class="co5">$_</span><span class="sy0">;</span>         <span class="co1"># Same, but written as a sub;</span>
+ 
+given <span class="st0">"world!"</span> <span class="br0">{</span>  <span class="co1"># Different way of saying $_ = "world"</span>
+    <span class="sy0">.</span><span class="kw3">print</span><span class="sy0">;</span>       <span class="co1"># Same as print $_;</span>
+<span class="br0">}</span>
+</pre></div>
+</div>
+<p>Default variables can be useful in a number of places, such as loops, where they can be used to clean up the code and make actions more explicit. We'll talk more about default variables as we go.</p>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1060
+CPU time usage: 0.168 seconds
+Real time usage: 0.184 seconds
+Preprocessor visited node count: 161/1000000
+Preprocessor generated node count: 385/1500000
+Post‐expand include size: 850/2048000 bytes
+Template argument size: 482/2048000 bytes
+Highest expansion depth: 3/40
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key enwikibooks:pcache:idhash:181505-0!*!0!!en!*!* and timestamp 20131123202523
+ -->
+<noscript>&lt;img src="//en.wikibooks.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /&gt;</noscript></div>								<div class="printfooter">
+				Retrieved from "<a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&oldid=1708290">http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&amp;oldid=1708290</a>"				</div>
+												<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="http://en.wikibooks.org/wiki/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="http://en.wikibooks.org/wiki/Category:Perl_6_Programming" title="Category:Perl 6 Programming">Perl 6 Programming</a></li></ul></div></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+			<div id="mw-head">
+				<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+	<h3 id="p-personal-label">Personal tools</h3>
+	<ul>
+<li id="pt-createaccount"><a href="http://en.wikibooks.org/w/index.php?title=Special:UserLogin&returnto=Perl+6+Programming%2FVariables+and+Data&type=signup">Create account</a></li><li id="pt-login"><a href="http://en.wikibooks.org/w/index.php?title=Special:UserLogin&returnto=Perl+6+Programming%2FVariables+and+Data" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>	</ul>
+</div>
+				<div id="left-navigation">
+					<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+	<h3 id="p-namespaces-label">Namespaces</h3>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/Perl 6 Programming Variables and Data - Wikibooks, open books for an open world.htm" title="View the content page [alt-shift-c]" accesskey="c">Book</a></span></li>
+					<li id="ca-talk" class="new"><span><a href="http://en.wikibooks.org/w/index.php?title=Talk:Perl_6_Programming/Variables_and_Data&action=edit&redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+	<h3 id="mw-vector-current-variant">
+		</h3>
+	<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+				</div>
+				<div id="right-navigation">
+					<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+	<h3 id="p-views-label">Views</h3>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/Perl 6 Programming Variables and Data - Wikibooks, open books for an open world.htm">Read</a></span></li>
+					<li id="ca-edit"><span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=edit" title="You can edit this page. Please use the preview button before saving [alt-shift-e]" accesskey="e">Edit</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+	<h3 id="p-cactions-label" tabindex="0"><span>Actions</span><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" tabindex="-1"></a></h3>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+<div id="p-search" role="search">
+	<h3><label for="searchInput">Search</label></h3>
+	<form action="http://en.wikibooks.org/w/index.php" id="searchform">
+				<div id="simpleSearch">
+						<input name="search" placeholder="Search" title="Search Wikibooks [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">						<button type="submit" name="button" title="Search the pages for this text" id="searchButton"><img src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/search-ltr.png" alt="Search" width="12" height="13"></button>								<input type="hidden" name="title" value="Special:Search">
+		</div>
+	</form>
+</div>
+				</div>
+			</div>
+			<div id="mw-panel" class="collapsible-nav">
+					<div id="p-logo" role="banner"><a style="background-image: url(//upload.wikimedia.org/wikibooks/en/b/bc/Wiki.png);" href="http://en.wikibooks.org/wiki/Main_Page" title="Visit the main page"></a></div>
+				<div class="portal first persistent" role="navigation" id="p-Navigation" aria-labelledby="p-Navigation-label">
+	<h3 id="p-Navigation-label">Navigation</h3>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage"><a href="http://en.wikibooks.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main Page</a></li>
+			<li id="n-help"><a href="http://en.wikibooks.org/wiki/Help:Contents" title="Find help on how to use and edit Wikibooks">Help</a></li>
+			<li id="n-Browse"><a href="http://en.wikibooks.org/wiki/Wikibooks:Card_Catalog_Office" title="Check out what Wikibooks has to offer">Browse</a></li>
+			<li id="n-Cookbook"><a href="http://en.wikibooks.org/wiki/Cookbook:Table_of_Contents" title="Learn recipes from around the world">Cookbook</a></li>
+			<li id="n-Wikijunior"><a href="http://en.wikibooks.org/wiki/Wikijunior" title="Books for children">Wikijunior</a></li>
+			<li id="n-Featured-books"><a href="http://en.wikibooks.org/wiki/Wikibooks:Featured_books" title="The best of Wikibooks">Featured books</a></li>
+			<li id="n-recentchanges"><a href="http://en.wikibooks.org/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+			<li id="n-sitesupport"><a href="http://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&utm_medium=sidebar&utm_campaign=C13_en.wikibooks.org&uselang=en" title="Support Wikibooks">Donations</a></li>
+			<li id="n-randomrootpage"><a href="http://en.wikibooks.org/wiki/Special:Randomrootpage">Random book</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-Community" aria-labelledby="p-Community-label">
+	<h3 id="p-Community-label" tabindex="2"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" aria-haspopup="true" aria-controls="p-Community-list" role="button" aria-pressed="true" aria-expanded="true">Community</a></h3>
+	<div class="body" style="display: block;">
+		<ul id="p-Community-list">
+			<li id="n-Reading-room"><a href="http://en.wikibooks.org/wiki/Wikibooks:Reading_room" title="Discuss Wikibooks-related questions and concerns with others">Reading room</a></li>
+			<li id="n-portal"><a href="http://en.wikibooks.org/wiki/Wikibooks:Community_Portal" title="Find your way around the Wikibooks community">Community portal</a></li>
+			<li id="n-currentevents"><a href="http://en.wikibooks.org/wiki/Wikibooks:Reading_room/Bulletin_Board" title="Important community news">Bulletin Board</a></li>
+			<li id="n-maintenance"><a href="http://en.wikibooks.org/wiki/Wikibooks:Maintenance" title="Frequent tasks that you can help with">Help out!</a></li>
+			<li id="n-Policies-and-guidelines"><a href="http://en.wikibooks.org/wiki/Wikibooks:Policies_and_guidelines" title="Pages detailing important rules and procedures">Policies and guidelines</a></li>
+			<li id="n-contact"><a href="http://en.wikibooks.org/wiki/Wikibooks:Contact_us" title="Alternative methods of communication">Contact us</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+	<h3 id="p-tb-label" tabindex="3"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" aria-haspopup="true" aria-controls="p-tb-list" role="button" aria-pressed="false" aria-expanded="false">Tools</a></h3>
+	<div class="body">
+		<ul id="p-tb-list">
+			<li id="t-whatlinkshere"><a href="http://en.wikibooks.org/wiki/Special:WhatLinksHere/Perl_6_Programming/Variables_and_Data" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="http://en.wikibooks.org/wiki/Special:RecentChangesLinked/Perl_6_Programming/Variables_and_Data" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+			<li id="t-upload"><a href="http://commons.wikimedia.org/wiki/Special:UploadWizard" title="Upload files [alt-shift-u]" accesskey="u">Upload file</a></li>
+			<li id="t-specialpages"><a href="http://en.wikibooks.org/wiki/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+			<li id="t-permalink"><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&oldid=1708290" title="Permanent link to this revision of the page">Permanent link</a></li>
+			<li id="t-info"><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&action=info">Page information</a></li>
+<li id="t-cite"><a href="http://en.wikibooks.org/w/index.php?title=Special:Cite&page=Perl_6_Programming%2FVariables_and_Data&id=1708290" title="Information on how to cite this page">Cite this page</a></li>		</ul>
+	</div>
+</div>
+<div class="portal expanded" role="navigation" id="p-lang" aria-labelledby="p-lang-label"><span class="uls-settings-trigger" tabindex="0" role="button" aria-haspopup="true" original-title="Language settings"></span>
+	<h3 id="p-lang-label" tabindex="4"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" aria-haspopup="true" aria-controls="p-lang-list" role="button" aria-pressed="true" aria-expanded="true">Languages</a></h3>
+	<div class="body" style="display: block;">
+		<ul id="p-lang-list">
+			
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-Sister_projects" aria-labelledby="p-Sister_projects-label">
+	<h3 id="p-Sister_projects-label" tabindex="5"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" aria-haspopup="true" aria-controls="p-Sister_projects-list" role="button" aria-pressed="false" aria-expanded="false">Sister projects</a></h3>
+	<div class="body">
+		<ul id="p-Sister_projects-list">
+			<li id="n-Wikipedia"><a href="http://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
+			<li id="n-Wikiversity"><a href="http://en.wikiversity.org/wiki/Wikiversity:Main_Page">Wikiversity</a></li>
+			<li id="n-Wiktionary"><a href="http://en.wiktionary.org/wiki/Wiktionary:Main_Page">Wiktionary</a></li>
+			<li id="n-Wikiquote"><a href="http://en.wikiquote.org/wiki/Main_Page">Wikiquote</a></li>
+			<li id="n-Wikisource"><a href="http://en.wikisource.org/wiki/Main_Page">Wikisource</a></li>
+			<li id="n-Wikinews"><a href="http://en.wikinews.org/wiki/Main_Page">Wikinews</a></li>
+			<li id="n-Wikivoyage"><a href="http://en.wikivoyage.org/wiki/Main_Page">Wikivoyage</a></li>
+			<li id="n-Commons"><a href="http://commons.wikimedia.org/wiki/Main_Page">Commons</a></li>
+			<li id="n-Wikidata"><a href="http://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a></li>
+		</ul>
+	</div>
+</div>
+<div class="portal collapsed" role="navigation" id="p-coll-print_export" aria-labelledby="p-coll-print_export-label">
+	<h3 id="p-coll-print_export-label" tabindex="6"><a href="http://en.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data#" aria-haspopup="true" aria-controls="p-coll-print_export-list" role="button" aria-pressed="false" aria-expanded="false">Print/export</a></h3>
+	<div class="body">
+		<ul id="p-coll-print_export-list">
+			<li id="coll-create_a_book"><a href="http://en.wikibooks.org/w/index.php?title=Special:Book&bookcmd=book_creator&referer=Perl+6+Programming%2FVariables+and+Data">Create a collection</a></li>
+			<li id="coll-download-as-rl"><a href="http://en.wikibooks.org/w/index.php?title=Special:Book&bookcmd=render_article&arttitle=Perl+6+Programming%2FVariables+and+Data&oldid=1708290&writer=rl">Download as PDF</a></li>
+			<li id="t-print"><a href="http://en.wikibooks.org/w/index.php?title=Perl_6_Programming/Variables_and_Data&printable=yes" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+		</ul>
+	</div>
+</div>
+			</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 29 January 2010, at 17:22.</li>
+											<li id="footer-info-copyright">Text is available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>; additional terms may apply.  By using this site, you agree to the <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="http://wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy.</a></li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="http://en.wikibooks.org/wiki/Wikibooks:Welcome" title="Wikibooks:Welcome">About Wikibooks</a></li>
+											<li id="footer-places-disclaimer"><a href="http://en.wikibooks.org/wiki/Wikibooks:General_disclaimer" title="Wikibooks:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-developers"><a class="external" href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-mobileview"><a href="http://en.m.wikibooks.org/wiki/Perl_6_Programming/Variables_and_Data" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-copyrightico">
+						<a href="http://wikimediafoundation.org/"><img src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/wikimedia-button.png" width="88" height="31" alt="Wikimedia Foundation"></a>
+					</li>
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mobile.desktop","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest","ext.gadget.extlinks","mw.MwEmbedSupport.style","ext.wikimediaEvents.moduleStorage","ext.navigationTiming","schema.UniversalLanguageSelector","ext.uls.eventlogger","mw.PopUpMediaTransform","ext.flaggedRevs.advanced","skins.vector.collapsibleNav"],null,true);
+}</script>
+<script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(13).php"></script><div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div>
+<script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/index(14).php"></script>
+<script src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/load(4).php"></script>
+<!-- Served by mw1169 in 0.128 secs. -->
+	
+
+<div><object id="ClCache" click="sendMsg" host="" width="0" height="0"></object></div></body><iframe id="evernoteFilingTools" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/filing_tools.htm"></iframe><iframe id="evernoteUserTools" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/user_tools.htm"></iframe><iframe id="evernoteShareTools" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/share_tools.htm"></iframe><iframe id="evernoteEmailSharing" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/email_sharing.htm"></iframe><iframe id="evernoteGlobalTools" src="./Perl 6 Programming Variables and Data - Wikibooks, open books for an open world_files/global_tools.htm"></iframe></html>
