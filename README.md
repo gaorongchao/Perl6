@@ -9,6 +9,9 @@ http://rakudo.org/downloads/star/
 从网站上下载rakudo-star---.tar.gz,解压以后，文件中README.txt.
 按照说明安装即可。
 
+报错:查看一下报错信息中缺少的模块，比如我这里缺少了Fatal.pm
+
+
 ## Perl 6 如何运行程序
 Perl 6 的解释器就是我们从上面网址中下载得的：rakudo。
 把perl6.exe添加到环境变量中。默认的安装路径是
