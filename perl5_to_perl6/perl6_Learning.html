@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>perl6学习</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="perl6学习"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2013-12-22T21:56+0800"/>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">perl6学习</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 写在perl6之前</a></li>
+<li><a href="#sec-2">2 perl6的安装</a></li>
+<li><a href="#sec-3">3 学习perl6</a>
+<ul>
+<li><a href="#sec-3-1">3.1 字符串,数组和哈希</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1 字符串strings</a></li>
+<li><a href="#sec-3-1-2">3.1.2 数组</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2 hash哈希</a></li>
+<li><a href="#sec-3-3">3.3 Types 类型</a></li>
+<li><a href="#sec-3-4">3.4 基本的控制结构</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 写在perl6之前</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>从95年到现在，很多年过去了，从perl6计划开始到现在，也有10年的时间了。
+所有的事物都在不断的发展，或许perl6还要再开发10年，或者20年，但是未来
+总是属于perl6的。与其等到40岁的时候再去学习一项新的东西，不如从现在开
+始就积极拥抱perl6。
+Perl6现在的版本Rakudo每个月都在更新新的版本。分为两种，一个是Rakudo，
+一个是Rakudo star。大家可以选择安装。
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> perl6的安装</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>perl6的官方网站：perl6.org。上面有perl6相关的东西。其中Compilers
+是Rakudo，也就是perl6的编译器。我们从这里面可以得到具体的安装信息。我
+所有的工作都是在Ubuntu下进行的。在rakudo.org里面我们可以下载。或者我
+们可以用git来进行安装。在下载下来的rakudo中有一个install的文件，这里
+包含了安装rakudo所需要的东西，和安装的信息，里面用Ubuntu作为例子，你
+可以根据这个来进行安装。
+安装完成以后，修改一下环境变量，vim .bashrc,然后添加perl6所在的目录
+就可以了。
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 学习perl6</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>我看的第一份资料是是从perl6.org/documentation/ 里下载的Perl 5 to 
+perl 6.还有doc.perl6.org里面的的东西。
+首先perl6中不用use strict;和use warnings;了，用了反而会报错。
+</p>
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 字符串,数组和哈希</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>用法
+</p>
+
+
+<pre class="example"><span class="linenr"> 1:  </span># 首先不需要use strict;use warnings;
+<span class="linenr"> 2:  </span>
+<span class="linenr"> 3:  </span>my $five =5 ;
+<span class="linenr"> 4:  </span>print " $five\n";
+<span class="linenr"> 5:  </span>say "five is $five";
+<span class="linenr"> 6:  </span># 上面是一样的效果，say输出自带换行符
+<span class="linenr"> 7:  </span># say的作用
+<span class="linenr"> 8:  </span>
+<span class="linenr"> 9:  </span>my @array =1,2,3,'foo';
+<span class="linenr">10:  </span>my $sum=@array[0]+@array[1];
+<span class="linenr">11:  </span>say "sum is $sum";
+<span class="linenr">12:  </span># 数组的元素可以这样写了。
+<span class="linenr">13:  </span>if $sum&gt;@array[2]
+<span class="linenr">14:  </span>{
+<span class="linenr">15:  </span>    say "not executed";
+<span class="linenr">16:  </span>}
+<span class="linenr">17:  </span># if语句这样写了，不用括号了
+<span class="linenr">18:  </span>my $number_of_elems=@array.elems;        # 或者
+<span class="linenr">19:  </span>my $number_of_elems=+@array;
+<span class="linenr">20:  </span>say "number of elems $number_of_elems";
+<span class="linenr">21:  </span># 数组元素的个数,不在支持$#了。
+<span class="linenr">22:  </span>
+<span class="linenr">23:  </span>my $last_item=@array[*-1];
+<span class="linenr">24:  </span>say "last item is $last_item";
+<span class="linenr">25:  </span># 数组的最后一个元素
+<span class="linenr">26:  </span>
+<span class="linenr">27:  </span>my %hash= foo=&gt;1,bar=&gt;2,baz=&gt;3;
+<span class="linenr">28:  </span>say "hash bar is  %hash{'bar'}";
+<span class="linenr">29:  </span>say "hash bar is  %hash&lt;bar&gt;";# 和上面一样的效果
+<span class="linenr">30:  </span># %hash{bar} 这样是错误的。
+<span class="linenr">31:  </span># 这是要去找一个叫bar()的子程序，很显然我们这里没有定义。
+<span class="linenr">32:  </span>
+</pre>
+
+<p>
+perl6和perl5类似，只不过更好而已。一句话是由分号终止，
+在一个语句块，或者大括号之间代码的最后一行，分号是可加，可不加的。
+变量仍然由$,@,%等打头。许多perl5的功能依然健在。
+</p>
+</div>
+
+<div id="outline-container-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> 字符串strings</h4>
+<div class="outline-text-4" id="text-3-1-1">
+
+<p>字符串被双引号包括（变量内插）或者用单引号，反斜杠和perl5一样。
+变量内插的规则有了一些变化，下面的情况将被变量内插
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>my $scalar = 6;
+<span class="linenr">2:  </span>my @array =1,2,3;
+<span class="linenr">3:  </span>say "Perl scalar is $scalar";
+<span class="linenr">4:  </span>say "array数组的所有元素 @array[]";        #空索引，结果是整个数组，1，2，3
+<span class="linenr">5:  </span>say "array 数组的第二个元素 @array[1]";
+<span class="linenr">6:  </span>say "没有索引，不会显示数组的名称： @array"; # 打印@array这几个字符
+<span class="linenr">7:  </span>say "双引号内执行代码：Code:{$scalar*2}";  #大括号中的部分会被看成代码，结果是内插的，结果是12
+</pre>
+
+<p>
+数组和hash只有在后面跟着索引的时候，或者跟着以（）结尾的方法的时候才会变量内插。
+如”some $obj.method()"),空的索引内插整个hash或者数组。
+</p></div>
+
+</div>
+
+<div id="outline-container-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> 数组</h4>
+<div class="outline-text-4" id="text-3-1-2">
+
+<p>数组变量仍然以@开头，但是不同的是即使取其中的单个元素也是以@开头的。
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>my @a =5,1,2;                          #列表是用逗号来分割构建的，不用括号了。
+<span class="linenr">2:  </span>say "数组的所有元素 @a[]";
+<span class="linenr">3:  </span>say "数组的第一个元素 @a[0]";            # 不再是$a[0]
+<span class="linenr">4:  </span>say "数组的第一个和第三个元素 @a[0,2]";   # 数组切片仍然可以用
+</pre>
+
+<p>
+列表是用逗号分割构建的。1,是一个列表，（1）不是。
+</p>
+<p>
+由于现在一切都可以看成对象，你可以用一下方法来对数组进行操作。
+</p>
+
+
+<pre class="example"><span class="linenr"> 1:  </span>my @a =5,1,2;             #列表是用逗号来分割构建的。
+<span class="linenr"> 2:  </span>say "数组a @a[]";
+<span class="linenr"> 3:  </span>
+<span class="linenr"> 4:  </span>my @b=@a.sort;           #排序后的数组a
+<span class="linenr"> 5:  </span>say "排序后的数组 @b[]";
+<span class="linenr"> 6:  </span>my $num_of_array_b=@b.elems;
+<span class="linenr"> 7:  </span>say "b的元素个数 $num_of_array_b";
+<span class="linenr"> 8:  </span>if @b&gt;2 {say "如果元素个数大于2，yes"}
+<span class="linenr"> 9:  </span>
+<span class="linenr">10:  </span>my $end_of_array_b=@b.end;
+<span class="linenr">11:  </span>say "b的最后一个元素的索引， $end_of_array_b";#替代了$#
+<span class="linenr">12:  </span>my @c=@b.map({$_*2});                      # map同样还是一种方法。
+<span class="linenr">13:  </span>say "数组c @c[]";
+</pre>
+
+<p>
+这里有一种qw/../的简写形式：
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>my @methods = &lt;shift unshift push pop end delete sort map&gt;;
+</pre>
+
+<p>
+数组相关新方法
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>@array.keys();       #取得数组的下标
+<span class="linenr">2:  </span>@array.values();     #取得数组的值
+<span class="linenr">3:  </span>@array.kv();         #下标和值一起取得
+<span class="linenr">4:  </span>@array.elems();      #元素的个数
+<span class="linenr">5:  </span>@array.exists(num）； #判断某个下标值是否存在，
+<span class="linenr">6:  </span>@array.max()；       #最大值
+<span class="linenr">7:  </span>@array.min()；       #最小值
+</pre>
+
+
+
+<pre class="example"><span class="linenr">1:  </span>@array.pick(num);   #随机取出数组中的不重复元素
+<span class="linenr">2:  </span>#例子
+<span class="linenr">3:  </span>my @array = &lt;a b c d e&gt;;
+<span class="linenr">4:  </span>say @array.pick(4);
+<span class="linenr">5:  </span>say @array.pick(*);#*代表所有元素
+</pre>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> hash哈希</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<p>while Perl5 hashes are even sized lists when viewed in list context,
+perl6 hashes are lists of pairs in that context.Pairs are also used 
+for other things,like named arguments for subroutines,but more on 
+that latler.
+如同数组一样，哈希也有不同的操作方法。
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>my %drinks =
+<span class="linenr">2:  </span>    France  =&gt; 'Wine',
+<span class="linenr">3:  </span>    Bavaria =&gt; 'Beer',
+<span class="linenr">4:  </span>    USA     =&gt; 'Coke';
+<span class="linenr">5:  </span>say "The people in France love ",%drinks{'France'};
+<span class="linenr">6:  </span>my @countries = %drinks.keys.sort;
+<span class="linenr">7:  </span>#%drinks{'France'};现在的用法
+<span class="linenr">8:  </span>#$drinks{France};  以前的用法
+<span class="linenr">9:  </span>#%drinks&lt;France&gt;;  现在也可以这样用
+</pre>
+
+<p>
+注意：当你访问hash的元素的时候%hash{&hellip;},键并不会自动quoted,
+%hash{foo}不是去访问foo的值，而是调用名称为foo()的子程序。自动quoting
+并没有消失，只不过换了一种方式：
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>say %drinks&lt;Bavaria&gt;;
+</pre>
+
+<p>
+所有的内建方法，可以是method也可以是一个子程序，所以这两种方法
+都对，sort @array @array.sort.<br/>
+最后你要知道，所有的[..] {..}(occurring direct after a term)
+仅仅是在使用一个特定的方法，而不是和数组和hash想相联系的。
+</p>
+
+
+<pre class="example"><span class="linenr">1:  </span>my $a = [1,2,3];
+<span class="linenr">2:  </span>say $a[2];      #3
+<span class="linenr">3:  </span>#this implies that you don't need special dereferencing syntax,and that you can
+<span class="linenr">4:  </span>#act as arrays, hashes and subs at the same time.没整明白？？？
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Types 类型</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<p>在perl6从都有类型，所有的东西都可以看成一个对象，都有一个类型。
+变量也可以有一个类型的约束，但是不是必须需要一个类型。
+</p>
+
+
+<pre class="example"><span class="linenr"> 1:  </span>   'a string'  #str字符串
+<span class="linenr"> 2:  </span>  2           #int整数型
+<span class="linenr"> 3:  </span>  3.14        #Rat (rational number)有理数
+<span class="linenr"> 4:  </span>  （1，2，3)   #Seq列表
+<span class="linenr"> 5:  </span>#所有的内建类型都是大写字母开头，所有的标准类型都是继承了Any，并且所有的都继承了Mu
+<span class="linenr"> 6:  </span>
+<span class="linenr"> 7:  </span>#你可以在声明的时候，加上类型
+<span class="linenr"> 8:  </span>my Numeric $x = 3.4;
+<span class="linenr"> 9:  </span>my $Int @a = 1,2,3;
+<span class="linenr">10:  </span># 试图把一个值赋予一个错误的类型是不对的。
+<span class="linenr">11:  </span>
+<span class="linenr">12:  </span>#对一个数组类型的类型定义，作用在数组的元素上，
+<span class="linenr">13:  </span>#Str @s  @s这个数组只能够包含字符串元素的数组
+<span class="linenr">14:  </span>
+<span class="linenr">15:  </span>#一些类型是隶属与一个大的分类，比如：整数型（Int），有理数（Rat），浮点型（Num）都是属于
+<span class="linenr">16:  </span>#Numeric这个大的类型
+<span class="linenr">17:  </span>
+<span class="linenr">18:  </span>#要知道一个对象的类型，可以使用.WHAT的方法
+<span class="linenr">19:  </span>say "foo".WHAT;
+<span class="linenr">20:  </span>#如果你要确定一个特殊类型的方法，还有一个方法，
+<span class="linenr">21:  </span>if $x ~~ Int
+<span class="linenr">22:  </span>{
+<span class="linenr">23:  </span>    say 'Variable $x contains an integer';
+<span class="linenr">24:  </span>}
+</pre>
+
+<p>
+我们需要类型的原因
+</p><ul>
+<li>1.编程更加安全
+</li>
+</ul>
+
+<p>如果你声明了一个特殊的类型，那么你可以执行特定的某种操作，而不用检查<br/>
+</p><ul>
+<li>2.可优化的
+</li>
+</ul>
+
+<p>如果在编译的时候提供了类型，那么运行的程序会有明显的优化。在原则上perl6
+不会比C慢
+</p><ul>
+<li>3.可扩展型
+</li>
+</ul>
+
+<p>有了类型信息和多重的操作路径，你可以很容易对特定的类型改善操作
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> 基本的控制结构</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<p>perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,while,for等，后面添加
+小括号了。事实上所有的标示符后面紧跟着小括号，都会被看成在调用子程序一个名称为if的子
+程序，for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。<br/>
+</p><ul>
+<li>if控制结构
+</li>
+</ul>
+
+
+
+
+<pre class="example"><span class="linenr">1:  </span>#if结构是变化最小的，你依然可以用elsif和else，unless也还在，但是在unless后面不允许else
+<span class="linenr">2:  </span>#分支结构
+<span class="linenr">3:  </span>if $sheep == 0 {say "how boring";}
+<span class="linenr">4:  </span>elsif $sheep ==1 {say "one lonely sheep";}
+<span class="linenr">5:  </span>else {say "a herd,How lovely!";}
+<span class="linenr">6:  </span>
+<span class="linenr">7:  </span>#你依然可以这样用
+<span class="linenr">8:  </span>say "you won" if $answer == 42;
+</pre>
+
+<ul>
+<li>Loops
+</li>
+</ul>
+
+
+
+
+<pre class="example"><span class="linenr"> 1:  </span>for 1..100 -&gt; $x
+<span class="linenr"> 2:  </span>{
+<span class="linenr"> 3:  </span>    say $x;#会输出1 2 3 。。
+<span class="linenr"> 4:  </span>}
+<span class="linenr"> 5:  </span>#-&gt;$x{..}被称为‘pointy block'如同匿名子程序或者lisp中的lambda
+<span class="linenr"> 6:  </span>#也可以有不止一个的循环变量
+<span class="linenr"> 7:  </span>for 0..5 -&gt;$even,$odd
+<span class="linenr"> 8:  </span>{
+<span class="linenr"> 9:  </span>    say "Even: $even \t Odd: $odd";
+<span class="linenr">10:  </span>}
+<span class="linenr">11:  </span>#结果如下：
+<span class="linenr">12:  </span>#Event:1     Odd：2
+<span class="linenr">13:  </span>#也就是交替出现
+<span class="linenr">14:  </span>
+<span class="linenr">15:  </span>#这个也是hash的迭代的方法
+<span class="linenr">16:  </span>my %hash=
+<span class="linenr">17:  </span>    a   =&gt; 1,
+<span class="linenr">18:  </span>    b   =&gt; 2,
+<span class="linenr">19:  </span>    c   =&gt; 3;
+<span class="linenr">20:  </span>for %hash.kv -&gt; $key,$value
+<span class="linenr">21:  </span>{
+<span class="linenr">22:  </span>    say "$key: $value";
+<span class="linenr">23:  </span>}
+<span class="linenr">24:  </span>
+<span class="linenr">25:  </span>#C-风格的for循环
+<span class="linenr">26:  </span>loop （my $x=1;$x&lt;100;$x**2)
+<span class="linenr">27:  </span>{
+<span class="linenr">28:  </span>    say $x;
+<span class="linenr">29:  </span>}
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2013-12-22T21:56+0800</p>
+<p class="author">Author: </p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

@@ -4,6 +4,8 @@ perl6学习
 所有的事物都在不断的发展，或许perl6还要再开发10年，或者20年，但是未来
 总是属于perl6的。与其等到40岁的时候再去学习一项新的东西，不如从现在开
 始就积极拥抱perl6。
+Perl6现在的版本Rakudo每个月都在更新新的版本。分为两种，一个是Rakudo，
+一个是Rakudo star。大家可以选择安装。
 * perl6的安装
 perl6的官方网站：perl6.org。上面有perl6相关的东西。其中Compilers
 是Rakudo，也就是perl6的编译器。我们从这里面可以得到具体的安装信息。我
@@ -17,31 +19,89 @@ perl6的官方网站：perl6.org。上面有perl6相关的东西。其中Compile
 我看的第一份资料是是从perl6.org/documentation/ 里下载的Perl 5 to 
 perl 6.还有doc.perl6.org里面的的东西。
 首先perl6中不用use strict;和use warnings;了，用了反而会报错。
-
-** 字符串
+** 字符串,数组和哈希
 用法
 #+begin_src perl -n 
-  my $fve = 5;
-  print "an interpolating string, just like in perl $five\n";
-  say 'say() adds a newline to the output,just like in perl 5.10';
-  say 'new line with out \n";
-  #这里的一个新的特性就是，say自动添加换行符。不用你手动加入了
+  # 首先不需要use strict;use warnings;
+  
+  my $five =5 ;
+  print " $five\n";
+  say "five is $five";
+  # 上面是一样的效果，say输出自带换行符
+  # say的作用
+  
+  my @array =1,2,3,'foo';
+  my $sum=@array[0]+@array[1];
+  say "sum is $sum";
+  # 数组的元素可以这样写了。
+  if $sum>@array[2]
+  {
+      say "not executed";
+  }
+  # if语句这样写了，不用括号了
+  my $number_of_elems=@array.elems;        # 或者
+  my $number_of_elems=+@array;
+  say "number of elems $number_of_elems";
+  # 数组元素的个数,不在支持$#了。
+  
+  my $last_item=@array[*-1];
+  say "last item is $last_item";
+  # 数组的最后一个元素
+  
+  my %hash= foo=>1,bar=>2,baz=>3;
+  say "hash bar is  %hash{'bar'}";
+  say "hash bar is  %hash<bar>";# 和上面一样的效果
+  # %hash{bar} 这样是错误的。
+  # 这是要去找一个叫bar()的子程序，很显然我们这里没有定义。
+  
 #+end_src
-貌似双引号的功能也有所改变，但是怎么改变的还没有具体的看到。\\
+perl6和perl5类似，只不过更好而已。一句话是由分号终止，
+在一个语句块，或者大括号之间代码的最后一行，分号是可加，可不加的。
+变量仍然由$,@,%等打头。许多perl5的功能依然健在。
+*** 字符串strings
 字符串被双引号包括（变量内插）或者用单引号，反斜杠和perl5一样。
 变量内插的规则有了一些变化，下面的情况将被变量内插
 #+begin_src perl -n
   my $scalar = 6;
   my @array =1,2,3;
-  say "Perl $scalar";
-  say "An @array[]";     #空索引，结果是整个数组，1，2，3
-  say "@array[1]";
-  say "Code:{$scalar*2}";#大括号中的部分会被看成代码，结果是内插的，结果是12
+  say "Perl scalar is $scalar";
+  say "array数组的所有元素 @array[]";        #空索引，结果是整个数组，1，2，3
+  say "array 数组的第二个元素 @array[1]";
+  say "没有索引，不会显示数组的名称： @array"; # 打印@array这几个字符
+  say "双引号内执行代码：Code:{$scalar*2}";  #大括号中的部分会被看成代码，结果是内插的，结果是12
 #+end_src
 数组和hash只有在后面跟着索引的时候，或者跟着以（）结尾的方法的时候才会变量内插。
 如”some $obj.method()"),空的索引内插整个hash或者数组。
+*** 数组
+数组变量仍然以@开头，但是不同的是即使取其中的单个元素也是以@开头的。
+#+BEGIN_SRC perl -n
+  my @a =5,1,2;                          #列表是用逗号来分割构建的，不用括号了。
+  say "数组的所有元素 @a[]";
+  say "数组的第一个元素 @a[0]";            # 不再是$a[0]
+  say "数组的第一个和第三个元素 @a[0,2]";   # 数组切片仍然可以用
+#+END_SRC
+列表是用逗号分割构建的。1,是一个列表，（1）不是。
 
-** 数组
+由于现在一切都可以看成对象，你可以用一下方法来对数组进行操作。
+#+BEGIN_SRC perl -n
+  my @a =5,1,2;             #列表是用逗号来分割构建的。
+  say "数组a @a[]";
+  
+  my @b=@a.sort;           #排序后的数组a
+  say "排序后的数组 @b[]";
+  my $num_of_array_b=@b.elems;
+  say "b的元素个数 $num_of_array_b";
+  if @b>2 {say "如果元素个数大于2，yes"}
+  
+  my $end_of_array_b=@b.end;
+  say "b的最后一个元素的索引， $end_of_array_b";#替代了$#
+  my @c=@b.map({$_*2});                      # map同样还是一种方法。
+  say "数组c @c[]";
+#+END_SRC
+这里有一种qw/../的简写形式：
+#+BEGIN_SRC perl -n
+  my @methods = <shift unshift push pop end delete sort map>;
+#+END_SRC
 数组相关新方法
 #+begin_src perl -n 
 @array.keys();       #取得数组的下标
@@ -52,16 +112,6 @@ perl 6.还有doc.perl6.org里面的的东西。
 @array.max()；       #最大值
 @array.min()；       #最小值
 #+end_src
-#+begin_src perl -n
-  my @array = 1,2,3,'foo';        #括号不再需要
-  my $sum = @array[0]+@array[1];  #单个数组元素也是以@开头
-  my @array[1,3];                 #数组切片仍然可用
-  my $num_of_element = @array.elems;
-  #元素的个数，在perl6中通过这种方式，而不是各种奇怪的符号，
-  my $num_of_element = +@array  #是求元素个数的另外一种方法。
-  my $last_item = @array[*-1];  #数组的最后一个元素
-
-#+end_src
 
 #+begin_src perl -n
   @array.pick(num);   #随机取出数组中的不重复元素
@@ -70,20 +120,12 @@ perl 6.还有doc.perl6.org里面的的东西。
   say @array.pick(4);
   say @array.pick(*);#*代表所有元素
 #+end_src
-所有的都是对象，你可以call mechods on arrays；
-#+begin_src perl -n
-  my @array = <5 7 3 6>;
-' #以前这样写@array = qw/5 7 3 6/；现在可以按照上面的方法写
-  my @b = @a.sort; #对@array使用方法“排序”
-  say @b;          #结果为3 5 6 7
-  say @b.elems;    #数组元素，结果为4
-  if @b > 2 {say “yes”}
-  say @b.end;      #最后一个元素的下标，结果为3
-  my @c = @b.map ({$_*2});
-  say @c；         #结果为6 10 12 14
-  
-#+end_src
-** hash
+** hash哈希
+while Perl5 hashes are even sized lists when viewed in list context,
+perl6 hashes are lists of pairs in that context.Pairs are also used 
+for other things,like named arguments for subroutines,but more on 
+that latler.
+如同数组一样，哈希也有不同的操作方法。
 #+begin_src perl -n
   my %drinks =
       France  => 'Wine',
@@ -95,6 +137,12 @@ perl 6.还有doc.perl6.org里面的的东西。
   #$drinks{France};  以前的用法
   #%drinks<France>;  现在也可以这样用
 #+end_src
+注意：当你访问hash的元素的时候%hash{...},键并不会自动quoted,
+%hash{foo}不是去访问foo的值，而是调用名称为foo()的子程序。自动quoting
+并没有消失，只不过换了一种方式：
+#+BEGIN_SRC perl -n
+  say %drinks<Bavaria>;
+#+END_SRC
 所有的内建方法，可以是method也可以是一个子程序，所以这两种方法
 都对，sort @array @array.sort.\\
 最后你要知道，所有的[..] {..}(occurring direct after a term)
@@ -117,8 +165,9 @@ perl 6.还有doc.perl6.org里面的的东西。
   #所有的内建类型都是大写字母开头，所有的标准类型都是继承了Any，并且所有的都继承了Mu
   
   #你可以在声明的时候，加上类型
-  my Numeric $x = 3,4;
-  my $Int @a 1,2,3;
+  my Numeric $x = 3.4;
+  my $Int @a = 1,2,3;
+  # 试图把一个值赋予一个错误的类型是不对的。
   
   #对一个数组类型的类型定义，作用在数组的元素上，
   #Str @s  @s这个数组只能够包含字符串元素的数组
@@ -134,20 +183,48 @@ perl 6.还有doc.perl6.org里面的的东西。
       say 'Variable $x contains an integer';
   }
 #+end_src
-我们需要类型的原因\\
-1.编程更加安全\\
+我们需要类型的原因
++ 1.编程更加安全
 如果你声明了一个特殊的类型，那么你可以执行特定的某种操作，而不用检查\\
-2.可优化的\\
++ 2.可优化的
 如果在编译的时候提供了类型，那么运行的程序会有明显的优化。在原则上perl6
-不会比C慢\\
-3.可扩展型\\
+不会比C慢
++ 3.可扩展型
 有了类型信息和多重的操作路径，你可以很容易对特定的类型改善操作
 
 ** 基本的控制结构
+*** 语法
+#+BEGIN_SRC perl -n
+  my $percent=120;
+  if $percent >100
+  {
+      say "weird mathematics";
+  }
+  
+  for 1..3
+  {
+      #用$_作为默认循环的变量
+      say 2*$_;
+  }
+  
+  for 1..3 -> $x
+  {
+      # 用一个特定的循环变量
+      say 2*$x;
+  }
+  
+  while $stuff.is_wrong
+  {
+      $stuff.try_to_make_right;
+  }
+  die "Access denied" unless $password eq "Secret";
+  
+#+END_SRC
 perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,while,for等，后面添加
 小括号了。事实上所有的标示符后面紧跟着小括号，都会被看成在调用子程序一个名称为if的子
-程序，for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。\\
-if控制结构
+程序，for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。
+*** 分支
++ if控制结构
 #+begin_src perl -n
   #if结构是变化最小的，你依然可以用elsif和else，unless也还在，但是在unless后面不允许else
   #分支结构
@@ -155,10 +232,10 @@ if控制结构
   elsif $sheep ==1 {say "one lonely sheep";}
   else {say "a herd,How lovely!";}
   
-  #你依然可以这样用
+  #你依然可以这样用,
   say "you won" if $answer == 42;
 #+end_src
-Loops
++ Loops
 #+begin_src perl -n
   for 1..100 -> $x
   {
@@ -171,7 +248,8 @@ Loops
       say "Even: $even \t Odd: $odd";
   }
   #结果如下：
-  #Event:1     Odd：2
+  #Event:1     Odd:2
+  #Event:3     Odd:4
   #也就是交替出现
   
   #这个也是hash的迭代的方法
@@ -184,9 +262,11 @@ Loops
       say "$key: $value";
   }
   
-  #C-风格的for循环
+  #C-风格的for循环,唯一一个需要括号的循环结构
   loop （my $x=1;$x<100;$x**2)
   {
       say $x;
   }
 #+end_src
+
+** Subroutines and Signatures 子程序
