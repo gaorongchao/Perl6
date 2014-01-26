@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="perl6学习"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-12-22T21:56+0800"/>
+<meta name="generated" content="2014-01-26T11:58+0800"/>
 <meta name="author" content=""/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -134,7 +134,17 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-3-2">3.2 hash哈希</a></li>
 <li><a href="#sec-3-3">3.3 Types 类型</a></li>
-<li><a href="#sec-3-4">3.4 基本的控制结构</a></li>
+<li><a href="#sec-3-4">3.4 基本的控制结构</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1 语法</a></li>
+<li><a href="#sec-3-4-2">3.4.2 分支</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5 Subroutines and Signatures 子程序和参数</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1 语法</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -445,10 +455,55 @@ that latler.
 <h3 id="sec-3-4"><span class="section-number-3">3.4</span> 基本的控制结构</h3>
 <div class="outline-text-3" id="text-3-4">
 
-<p>perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,while,for等，后面添加
+
+</div>
+
+<div id="outline-container-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> 语法</h4>
+<div class="outline-text-4" id="text-3-4-1">
+
+
+
+
+<pre class="example"><span class="linenr"> 1:  </span>my $percent=120;
+<span class="linenr"> 2:  </span>if $percent &gt;100
+<span class="linenr"> 3:  </span>{
+<span class="linenr"> 4:  </span>    say "weird mathematics";
+<span class="linenr"> 5:  </span>}
+<span class="linenr"> 6:  </span>
+<span class="linenr"> 7:  </span>for 1..3
+<span class="linenr"> 8:  </span>{
+<span class="linenr"> 9:  </span>    #用$_作为默认循环的变量
+<span class="linenr">10:  </span>    say 2*$_;
+<span class="linenr">11:  </span>}
+<span class="linenr">12:  </span>
+<span class="linenr">13:  </span>for 1..3 -&gt; $x
+<span class="linenr">14:  </span>{
+<span class="linenr">15:  </span>    # 用一个特定的循环变量
+<span class="linenr">16:  </span>    say 2*$x;
+<span class="linenr">17:  </span>}
+<span class="linenr">18:  </span>
+<span class="linenr">19:  </span>while $stuff.is_wrong
+<span class="linenr">20:  </span>{
+<span class="linenr">21:  </span>    $stuff.try_to_make_right;
+<span class="linenr">22:  </span>}
+<span class="linenr">23:  </span>die "Access denied" unless $password eq "Secret";
+<span class="linenr">24:  </span>
+</pre>
+
+<p>
+perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,while,for等，后面添加
 小括号了。事实上所有的标示符后面紧跟着小括号，都会被看成在调用子程序一个名称为if的子
-程序，for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。<br/>
-</p><ul>
+程序，for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。
+</p></div>
+
+</div>
+
+<div id="outline-container-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> 分支</h4>
+<div class="outline-text-4" id="text-3-4-2">
+
+<ul>
 <li>if控制结构
 </li>
 </ul>
@@ -462,7 +517,7 @@ that latler.
 <span class="linenr">4:  </span>elsif $sheep ==1 {say "one lonely sheep";}
 <span class="linenr">5:  </span>else {say "a herd,How lovely!";}
 <span class="linenr">6:  </span>
-<span class="linenr">7:  </span>#你依然可以这样用
+<span class="linenr">7:  </span>#你依然可以这样用,
 <span class="linenr">8:  </span>say "you won" if $answer == 42;
 </pre>
 
@@ -485,33 +540,127 @@ that latler.
 <span class="linenr"> 9:  </span>    say "Even: $even \t Odd: $odd";
 <span class="linenr">10:  </span>}
 <span class="linenr">11:  </span>#结果如下：
-<span class="linenr">12:  </span>#Event:1     Odd：2
-<span class="linenr">13:  </span>#也就是交替出现
-<span class="linenr">14:  </span>
-<span class="linenr">15:  </span>#这个也是hash的迭代的方法
-<span class="linenr">16:  </span>my %hash=
-<span class="linenr">17:  </span>    a   =&gt; 1,
-<span class="linenr">18:  </span>    b   =&gt; 2,
-<span class="linenr">19:  </span>    c   =&gt; 3;
-<span class="linenr">20:  </span>for %hash.kv -&gt; $key,$value
-<span class="linenr">21:  </span>{
-<span class="linenr">22:  </span>    say "$key: $value";
-<span class="linenr">23:  </span>}
-<span class="linenr">24:  </span>
-<span class="linenr">25:  </span>#C-风格的for循环
-<span class="linenr">26:  </span>loop （my $x=1;$x&lt;100;$x**2)
-<span class="linenr">27:  </span>{
-<span class="linenr">28:  </span>    say $x;
-<span class="linenr">29:  </span>}
+<span class="linenr">12:  </span>#Event:1     Odd:2
+<span class="linenr">13:  </span>#Event:3     Odd:4
+<span class="linenr">14:  </span>#也就是交替出现
+<span class="linenr">15:  </span>
+<span class="linenr">16:  </span>#这个也是hash的迭代的方法
+<span class="linenr">17:  </span>my %hash=
+<span class="linenr">18:  </span>    a   =&gt; 1,
+<span class="linenr">19:  </span>    b   =&gt; 2,
+<span class="linenr">20:  </span>    c   =&gt; 3;
+<span class="linenr">21:  </span>for %hash.kv -&gt; $key,$value
+<span class="linenr">22:  </span>{
+<span class="linenr">23:  </span>    say "$key: $value";
+<span class="linenr">24:  </span>}
+<span class="linenr">25:  </span>
+<span class="linenr">26:  </span>#C-风格的for循环,唯一一个需要括号的循环结构
+<span class="linenr">27:  </span>loop （my $x=1;$x&lt;100;$x**2)
+<span class="linenr">28:  </span>{
+<span class="linenr">29:  </span>    say $x;
+<span class="linenr">30:  </span>}
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Subroutines and Signatures 子程序和参数</h3>
+<div class="outline-text-3" id="text-3-5">
+
+
+</div>
+
+<div id="outline-container-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> 语法</h4>
+<div class="outline-text-4" id="text-3-5-1">
+
+<ul>
+<li>Perl5 样式的子程序
+</li>
+</ul>
+
+
+
+
+<pre class="example"># 没有signature(参数)
+sub print_arguments 
+{
+        say "Arguments:";
+        for (@_)
+        {
+                say "\t$_";
+        }
+}
+my @argument = qw/1 2 3 4/;
+print_arguments(@argument); 
+</pre>
+
+<ul>
+<li>拥有参数名称和类型的子程序
+</li>
+</ul>
+
+
+
+
+<pre class="example">sub distance (Int $x1, Int $y1, Int $x2, Int $y2)
+{
+        return sqrt ($x2-$x1)**2 + ($y2-$y1)**2;
+}
+say distance(3,5,0,1);
+# 结果是3^2 + 4^2然后开方结果是5
+</pre>
+
+<ul>
+<li>默认参数
+</li>
+</ul>
+
+
+
+
+<pre class="example">sub logarithm($num,$base = 2.7183)
+{
+        return log($num)/log($base)
+}
+say logarithm(4);
+# 1.38628
+# 这里之提供了一个参数，所以第二个就是使用的默认的参数
+say logarithm(4,2);
+# 2
+# 这里提供了两个参数，所以默认参数不再起作用
+</pre>
+
+<ul>
+<li>具名参数（named arguments)
+</li>
+</ul>
+
+
+
+
+<pre class="example">sub doit(:$when, :$what)
+{
+        say "doign $what at $when";
+}
+doit(what =&gt; "stuff",when =&gt; "once");
+# doing stuff at onec
+doit(:when&lt;noon&gt;, :what("more stuff"));
+# doing more stuff at noon
 </pre>
 
 </div>
 </div>
 </div>
 </div>
+</div>
 
 <div id="postamble">
-<p class="date">Date: 2013-12-22T21:56+0800</p>
+<p class="date">Date: 2014-01-26T11:58+0800</p>
 <p class="author">Author: </p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

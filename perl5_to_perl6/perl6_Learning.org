@@ -269,4 +269,52 @@ perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,wh
   }
 #+end_src
 
-** Subroutines and Signatures 子程序
+** Subroutines and Signatures 子程序和参数
+*** 语法
++ Perl5 样式的子程序
+#+BEGIN_SRC perl
+  # 没有signature(参数)
+  sub print_arguments 
+  {
+          say "Arguments:";
+          for (@_)
+          {
+                  say "\t$_";
+          }
+  }
+  my @argument = qw/1 2 3 4/;
+  print_arguments(@argument); 
+#+END_SRC
++ 拥有参数名称和类型的子程序
+#+BEGIN_SRC perl
+  sub distance (Int $x1, Int $y1, Int $x2, Int $y2)
+  {
+          return sqrt ($x2-$x1)**2 + ($y2-$y1)**2;
+  }
+  say distance(3,5,0,1);
+  # 结果是3^2 + 4^2然后开方结果是5
+#+END_SRC
++ 默认参数
+#+BEGIN_SRC perl
+  sub logarithm($num,$base = 2.7183)
+  {
+          return log($num)/log($base)
+  }
+  say logarithm(4);
+  # 1.38628
+  # 这里之提供了一个参数，所以第二个就是使用的默认的参数
+  say logarithm(4,2);
+  # 2
+  # 这里提供了两个参数，所以默认参数不再起作用
+#+END_SRC
++ 具名参数（named arguments)
+#+BEGIN_SRC perl
+  sub doit(:$when, :$what)
+  {
+          say "doign $what at $when";
+  }
+  doit(what => "stuff",when => "once");
+  # doing stuff at onec
+  doit(:when<noon>, :what("more stuff"));
+  # doing more stuff at noon
+#+END_SRC
