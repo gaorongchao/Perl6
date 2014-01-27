@@ -318,3 +318,124 @@ perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,wh
   doit(:when<noon>, :what("more stuff"));
   # doing more stuff at noon
 #+END_SRC
+*** 描述
+子程序是又sub开头的关键字进行声明，可以拥有一系列的参数，
+如同C,Java和其他大多数程序语言一样。
+这些参数可以选择性的有类型的限制。
+
+参数默认是只读的。但是可以通过所谓的“特性”来进行修改。
+#+BEGIN_SRC perl
+  sub try-to-reset($bar)
+  {
+          $bar = 2; # 禁止的
+  }
+  
+  my $x = 2;
+  sub reset($bar is rw)
+  {
+          $bar=0; # 允许的
+  }
+  reset($x);
+  say $x; # 0
+  
+  sub quox($bar is copy)
+  {
+          $bar=3;
+  }
+  quox($x);
+  say $x; # is still 0
+#+END_SRC
+参数可以通过在后面添加？进行选择性是否需要这个参数。
+也可以通过提供一个默认值。
+#+BEGIN_SRC perl
+  sub foo($x,$y?)
+  {
+          if $y.defined
+          {
+                  say "Second parameter was supplied and defined";
+          }
+          else
+          {
+                  say "Don't have second parameter!";
+          }
+  }
+  foo(5,6); # Secon parameter was supplied and defined
+  foo(5);   # Don't have second parameter!
+#+END_SRC
+#+BEGIN_SRC perl
+  sub bar($x,$y=2*$x)
+  {
+  ...
+  }
+#+END_SRC
+**** 具名参数
+当你调用一个像这样的参数的时候：my_sub($first,$second),
+$first参数和第一个参数是绑定的，$second参数和第二个参数
+是绑定的。这也是为什么称之为“位置参数“。
+
+有些时候，名称比数字更好记忆，这是为什么Perl6有”具名参数的原因。
+#+BEGIN_SRC perl
+  my $r = Rectangle.new(
+                  x         => 100,
+                  y         => 200,
+                  height=> 23,
+                  width => 42,
+                  color => "black");
+#+END_SRC
+但你看到这种形式的东西的时候，你立马就能明白参数的意义。
+为了定义一个具名参数，你只需要在参数前面添加一个冒号。
+#+BEGIN_SRC perl
+  sub area (:$width,:$height)
+  {
+          return $width * $height;
+  }
+  area(width =>2,height=>3);
+  area(height =>3,width=>2);
+  area(:height(3),:width(2));
+#+END_SRC
+最后一个例子用了所谓的“冒号配对”语法形式。
+如果仅仅有留下名字，那么会赋值为"True",取反则会赋值为"False":
+#+BEGIN_SRC perl
+  :draw-perimeter      # same as "draw-perimeter=>True"
+  :!transparent        # same as "transparent   =>False"
+#+END_SRC
+在具名参数的声明中，变量名同时用做参数的名字。你也可以用不同的名字：
+#+BEGIN_SRC perl
+  sub area (:width($w),:height($h))
+  {
+      return $w*$h;
+  }
+  area(width=>2,height=>3);
+#+END_SRC
+**** Slurpy Parameters
+仅仅给你的子程序命一个名字，并不意味着你事先知道子程序有多少个参数。
+你可以定义所谓的slurpy parameters(在所有的正式的参数后面）可以
+用所有的剩余参数。
+#+BEGIN_SRC perl
+  sub tail ($first, *@rest)
+  {
+          say "first: $first";
+          say "Rest: @rest[]";
+  }
+  tail(1,2,3,4);
+  # 结果是:First: 1 \n Rest:2 3 3\n";
+#+END_SRC
+具名slurpy参数是通过在哈希参数前加星号来完成的。(??????)
+#+BEGIN_SRC perl
+  sub order-meal ($name,*%extras)
+  {
+          say "I'd like somen $name, but with a few modifications:";
+          say %extras.keys.join(', ');
+  }
+  order-meal ('beef steak', :vegetarian, :well-done);
+#+END_SRC
+**** Interpolation 变量内插
+默认情况下，数组不能内插在变量中，与Perl5不同，你可以这些写：
+#+BEGIN_SRC perl
+  sub a($scalar1,@list,$scalar2)
+  {
+          say $scalar2;
+  }
+  my @list = "foo","bar";
+  a(1,@list,2); # 2
+#+END_SRC
