@@ -439,3 +439,71 @@ $first参数和第一个参数是绑定的，$second参数和第二个参数
   my @list = "foo","bar";
   a(1,@list,2); # 2
 #+END_SRC
+这也意味着你不能用列表来作为参数列表。
+#+BEGIN_SRC perl
+  my @indexes=1,4;
+  say "abc".substr(@indexes); # 结果是c
+#+END_SRC
+（真实发生的事情是：这第一个参数可以是Int类型，如果不是，强制转换成Int.
+所以你写成"abc."substr(@indexes.elems)是一样的。）
+你可以通过使用使用潜前置的|来实现预定的功能：
+#+BEGIN_SRC perl
+  say "abcdefgh".substr(|@indexes) # bcde,same as "abcdefgh".substr(1,4);
+#+END_SRC
+**** Multi Subs 多样子程序
+实际上，你可以用同一个子程序名称来定义多个具有不同参数列表的子程序。
+#+BEGIN_SRC perl
+  multi sub my_substr($str) {...}
+  multi sub my_substr($str,$start) {...}
+  multi sub my_substr($str,$start,$end) {...}
+  multi sub my_substr($str,$start,$end,$subst) {...}
+#+END_SRC
+你定义好了以后，当你调用这种子程序的时候，其中能匹配参数列表的子程序将
+被调用。
+
+这种多样子程序不仅仅能够区分参数的个数，而且能能够区分参数的类型。
+#+BEGIN_SRC perl
+  multi sub frob (Str $s) {say "Frobbing String $s"}
+  multi sub frob (Int $i) {say "Frobbing Integer $i"}
+  frob ("x");
+  frob (2);
+  # 结果
+  # Frobbing String x
+  # Frobbing Integer 2
+  
+#+END_SRC
+
+*** Motivation真实意图
+没人会怀疑给子程序参数一个明确名称的重要性：
+更少的输入，更少的双重参数的检查，更多的自我说明性质的代码。
+
+同时也允许有用的自省。
+？？？？
+** Objects and Classes
+*** 语法
+#+BEGIN_SRC perl
+
+#+END_SRC
+** Contexts 上下文
+*** 语法
+#+BEGIN_SRC perl
+  my @a = <a b c>;
+  my $x = @a;
+  say $x[2];
+  say (~2).WHAT;
+  say +@a;
+  if @a <10 {say "short array";}
+#+END_SRC
+*** 描述
+当你这样写的时候
+#+BEGIN_SRC perl
+  $x = @a;
+#+END_SRC
+在Perl5中，$x 只包含@a的元素的数量。
+为了保留所有的信心，你必须要用引用：$x = \@a;
+
+在Perl6 中，用数值变量储存数组变量，你不会丢失任何东西。
+这样为上下文和更多的特殊上下文（数值，整数，和字符串）做好了准备。
+Void(空)和列表上下文没有变化。
+你可以强制通过语法强制转换上下文环境。
+
