@@ -3,11 +3,11 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>1<sub>The</sub><sub>Basics</sub></title>
+<title>2: The Basics</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="1<sub>The</sub><sub>Basics</sub>"/>
+<meta name="title" content="2: The Basics"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-12-21T20:38+0800"/>
+<meta name="generated" content="2014-03-22T10:40+0800"/>
 <meta name="author" content=""/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -115,7 +115,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="content">
-<h1 class="title">1<sub>The</sub><sub>Basics</sub></h1>
+<h1 class="title">2: The Basics</h1>
 
 
 <div id="table-of-contents">
@@ -146,18 +146,18 @@ for the JavaScript code in this tag.
 
 
 <pre class="example">Beth Ana Charlie Dave 
-Ana Dave               3:0
-Charlie Beth           3:1
-Ana Beth               2:3
-Dave Charlie           3:0
-Ana Charlie            3:1
-Beth Dave              0:3
+Ana Dave            |  3:0
+Charlie Beth        |  3:1
+Ana Beth            |  2:3
+Dave Charlie        |  3:0
+Ana Charlie         |  3:1
+Beth Dave           |  0:3
 </pre>
 
 
 <p>
 第一行是所有选手的名字，后面跟着的是每场比赛的结果。
-这里有一个解决此问题的Perl 6 脚本:perl-1-：
+这里有一个解决此问题的Perl 6 脚本:perl-1-1：
 </p>
 
 
@@ -192,22 +192,83 @@ Beth Dave              0:3
 </pre>
 
 <p>
-![plot of chunk unnamed-chunk-1](fig1/1.PNG) 
+输出文件：
+</p>
+
+
+<pre class="example">Ana has won 2 matches and 8 sets
+Dave has won 2 matches and 6 sets
+Charlie has won 1 matches and 4 sets
+Beth has won 1 matches and 4 sets
+</pre>
+
+<p>
+没一个Perl6程序都需要以 use v6;。这一行告诉编译器Perl代码的版本。
+如果，你不小心用Perl5来运行这个程序，你讲得到错误信息。
 </p>
 <p>
-从程序中学到的东西：
-1：文件的打开
-2：split
-3:if
-4:sort
+一个Perl6程序包含0行或者更多的语句。每一个语句以分号结尾，或者以大括号结尾：
 </p>
+
+
+<pre class="example">my $file = open 'scores';
+</pre>
+
+<p>
+"my"声明一个词法变量。词法变量只有在当前代码块可用，从声明开始到代码块的结束。
+如果一个代码块始终没有闭合，那么在文件剩下的所有地方都可以使用。代码块的定义是：
+一段在花括号{}之间的代码。
+</p>
+<p>
+一个变量名称以"魔符"开始，魔符是指那些非字母，非数字的符号，比如：$,@,% 或者&amp;-
+或者有时出现的双冒号“::”也是。
+魔符指明了变量的结构类型，比如：它应该被当作一个值，还是多个值，还是一个子程序，等等。
+跟在“魔符”后面的是“标识符“，标识符可以是包含字母，数字和下划线。在字母与字母之间，
+你可以用短横线"-"或者撇号"''"。所以"isn't"和double-click 都是合法的变量标识符。
+</p>
+<p>
+魔符 "$" 表明是一个数值变量，指明这个变量只存储了一个值。
+</p>
+<p>
+内建函数"open"打开了一个名为"scores"的文件，然后返回一个文件句柄，
+文件句柄是一个代表该文件的对象。
+赋值符号"=",把文件句柄赋值给左边的变量，这也就是意味着变量$file现在存储着文件句柄。
+</p>
+<p>
+'scores'是字符串文本（string literal）。字符串（string）是一段纯文本。
+字符串文本（string literal)是直接出现在程序中的字符串。
+在这一行中，它是提供给open函数的参数。
+</p>
+
+
+
+<pre class="example">my @names = $file.get.words;
+</pre>
+
+<p>
+上面语句的左侧调用了一种”方法“&ndash;一个命名的一系列行为的集合体&ndash;获取存储在$file变量中的句柄。
+被命名为get的这一方法从文件中读取并返回一行，去掉末尾的换行符。word同样是一个方法，调用从
+get中返回的一行文本。word这一方法，分解它的invocant（它要操作的字符串）成一些列的单词。
+这里单词的意思是不包含空格的字符串。它把字符串'Beth Ana Charlie Dave'分解成多个字符串
+'Beth','Ana','Charlie','Dave'。
+</p>
+<p>
+最后，这一字符串列表存储到数组@names中。魔符@表明所声明的变量是一个数组。数组存储的是有序列表。
+</p>
+
+
+
+<pre class="example">my %matches;
+my %sets;
+</pre>
+
 
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2013-12-21T20:38+0800</p>
+<p class="date">Date: 2014-03-22T10:40+0800</p>
 <p class="author">Author: </p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
