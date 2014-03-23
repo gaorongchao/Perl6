@@ -1,6 +1,9 @@
 #+TITLE: 2: The Basics
 #+AUTHOR: GRC(扬眉剑)
+* about
+github地址：https://github.com/gaorongchao/Perl6/tree/master/Using_perl6
 
+如果发现任何错误和翻译不当的地方，请告知，非常感谢。
 * 第二章：基础
 Perl起源于一个致力于从文本文件中收集整理信息的编程语言。
 现在Perl在文本处理方面仍然强大，Perl 5 是一个一般意义上的强力编程语言。
