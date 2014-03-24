@@ -1,0 +1,6 @@
+#+TITLE: 1: Preface
+#+AUTHOR: GRC(扬眉剑)
+* about
+github地址：
+如果发现任何错误和翻译不当的地方，请告知，非常感谢。
+* 第一章：前言
