@@ -1,5 +1,5 @@
-% Created 2014-03-23 Sun 10:41
-\documentclass[11pt]{article}
+% Created 2014-04-09 Wed 08:54
+\documentclass{ctexart}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -14,7 +14,12 @@
 \usepackage{latexsym}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{background}{rgb}{0.9,0.9,0.9}
 \tolerance=1000
+
 \providecommand{\alert}[1]{\textbf{#1}}
 
 \title{2: The Basics}
@@ -32,6 +37,7 @@
 \setcounter{tocdepth}{3}
 \tableofcontents
 \vspace*{1cm}
+
 \section{about}
 \label{sec-1}
 
@@ -51,7 +57,8 @@ Perl起源于一个致力于从文本文件中收集整理信息的编程语言�
 
 输入文件格式如下(储存在一个名为“scores”的文件中)：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 Beth Ana Charlie Dave 
 Ana Dave            |  3:0
 Charlie Beth        |  3:1
@@ -59,12 +66,13 @@ Ana Beth            |  2:3
 Dave Charlie        |  3:0
 Ana Charlie         |  3:1
 Beth Dave           |  0:3
-\end{verbatim}
+\end{lstlisting}
 
 第一行是所有选手的名字，后面跟着的是每场比赛的结果。
 这里有一个解决此问题的Perl 6 脚本:perl-1-1：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
  1:  use v6;
  2:  
  3:   my $file = open 'scores';
@@ -93,23 +101,25 @@ Beth Dave           |  0:3
 26:   for @sorted -> $n {
 27:   say "$n has won %matches{$n} matches and %sets{$n} sets";
 28:   }
-\end{verbatim}
+\end{lstlisting}
 输出文件：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 Ana has won 2 matches and 8 sets
 Dave has won 2 matches and 6 sets
 Charlie has won 1 matches and 4 sets
 Beth has won 1 matches and 4 sets
-\end{verbatim}
+\end{lstlisting}
 每一个Perl6程序都需要以 “use v6”; 开始。这一行告诉编译器Perl代码的版本。
 如果，你不小心用Perl5来运行这个程序，你将得到错误信息。
 
 一个Perl6程序包含0行或者更多的语句。每一个语句以分号结尾，或者以大括号结尾：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my $file = open 'scores';
-\end{verbatim}
+\end{lstlisting}
 ``my''声明一个词法变量。词法变量只在当前代码块可用，从声明开始到代码块的结束。
 如果一个代码块始终没有闭合，那么该变量可以在剩下的所有地方使用。代码块的定义是：
 一段在花括号\{\}之间的代码。
@@ -131,9 +141,10 @@ Beth has won 1 matches and 4 sets
 在这一行中，它是提供给open函数的参数。
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my @names = $file.get.words;
-\end{verbatim}
+\end{lstlisting}
 上面语句的右侧调用了一种“方法”（一个命名的一系列行为的集合体）获取存储在\$file变量中的句柄。
 被命名为get的这一方法从文件中读取并返回一行，去掉末尾的换行符。word同样是一个方法，调用从
 get中返回的一行文本。word这一方法，分解它的invocant（它要操作的字符串）成一系列的单词。
@@ -143,10 +154,11 @@ get中返回的一行文本。word这一方法，分解它的invocant（它要�
 最后，这一字符串列表存储到数组@names中。魔符@表明所声明的变量是一个数组。数组存储的是有序列表。
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my %matches;
 2:  my %sets;
-\end{verbatim}
+\end{lstlisting}
 这两行代码声明了两个哈希。魔符“\%”把变量标记为哈希。哈希又称为散列：是无序的键-值对的集合。
 在其他语言中又称为“哈希表”，“字典”或者“（map）图”
 你可以通过“键 \$key”利用“\%hash\{\$key\}”来查询在哈希表中的值。
@@ -159,11 +171,12 @@ get中返回的一行文本。word这一方法，分解它的invocant（它要�
 一个数值变量可以包含一个复杂对象（compound object),比如：数组或者哈希；
 魔符\$表明它应该被当作一个单独的值，尽管有可能它包含众多的值（像一个数组或者哈希）。
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  for $file.lines ->$line{
 2:  ...
 3:  }
-\end{verbatim}
+\end{lstlisting}
 “for”产生了一个由花括号界定运行范围的循环，循环会遍历列表中的每一个值。
 \$file.lines 从scores文件中读取了很多行，除掉前面\$file.get读取的那一行以外，到最后一行。
 循环依次将每一行的值赋予\$line变量。
@@ -171,9 +184,10 @@ get中返回的一行文本。word这一方法，分解它的invocant（它要�
 第一次迭代\$line将包含字符串 “Ana Dave | 3:0”；第二次迭代\$line将包含字符串“Charlie Beth | 3:1”，等等。
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my ($pairing,$result) = $line.split('|');
-\end{verbatim}
+\end{lstlisting}
 “my”可以同时声明多个变量。在赋值符号（=）的右侧调用了一个名为“split”的方法，它把“|”当作参数。
 
 split把他作用的内容以|为分割点，分割成一系列的字符串。所以如果你用“|”作为粘合符号，把这些字符串粘合。
@@ -185,10 +199,11 @@ split把他作用的内容以|为分割点，分割成一系列的字符串。�
 
 下面两行是同样的模式：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my ($p1,$p2) = $pairing.words;
 2:  my ($r1,$r2) = $result.split(':');
-\end{verbatim}
+\end{lstlisting}
 第一行代码提取并保存两位运动员的姓名到\$p1和\$p2这两个变量中。
 
 第二行提取每一位运动员的比赛结果，并且分别保存到\$r1和\$r2中。
@@ -198,7 +213,8 @@ split把他作用的内容以|为分割点，分割成一系列的字符串。�
 
 Table2.1:Contents of Variables
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  Variable  Contents               
 2:  $line     'Ana Dave    | 3:0' 
 3:  $pairing  'Ana Dave'              
@@ -207,20 +223,22 @@ Table2.1:Contents of Variables
 6:  $p2       'Dave'                  
 7:  $r1       '3'                     
 8:  $r2       '0'
-\end{verbatim}
+\end{lstlisting}
 
 程序接下来统计了每一位运动员赢的局数：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  %sets{$p1} += $r1;
 2:  %sets{$p2} += $r2;
-\end{verbatim}
+\end{lstlisting}
 这是下面的简写：
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  %sets{$p1} = %sets{$p1}+$r1;
 2:  %sets{$p2} = %sets{$p2}+$r2;
-\end{verbatim}
+\end{lstlisting}
 += \$r1 的含义是：把左侧的变量加上\$r1.
 在第一次迭代的时候\%sets\{\$p1\}还没有设置类型，
 所以默认为一个称为“Any”的特殊值。
@@ -234,13 +252,14 @@ Table2.1:Contents of Variables
 （胖箭头=>把键值对分开）
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  if $r1>$r2{
 2:      %matches{$p1}++;
 3:  } else {
 4:      %matches{$p2}++;
 5:  }
-\end{verbatim}
+\end{lstlisting}
 如果\$r1 的值大于\$r2的值，那么\%matches\{\$p1\}增加1。
 如果\$r1 的值小于\$r2的值，那么\%matches\{\$p2\}增加1。
 和前面的+=的例子一样，如果哈希中没有存在这个值，
@@ -252,9 +271,10 @@ Table2.1:Contents of Variables
 以后的返回值。my \$x=1; say ++\$x 输出2。
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my @sorted = @names.sort({ %sets{$_} }).sort({ %matches{$_} }).reverse;
-\end{verbatim}
+\end{lstlisting}
 
 这一行代码包含三个独立的过程。首先调用数组的sort方法。
 但是默认的排序方法是按照内容排序的。为了按照赢得多少的顺序输出运动员的姓名，
@@ -284,11 +304,12 @@ sort是按照升序来排序，也就是从小到大排序。
 最后把结果存入到@sorted数组中。
 
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  for @sorted -> $n {
 2:      say "$n has won %matches{$n} matches and %sets{$n} sets";
 3:  }
-\end{verbatim}
+\end{lstlisting}
 
 为了输出运动员的名字和他们的成绩，我们对@sorted数组进行循环。
 依次将运动员名字赋值给\$n。我们可以这样来读代码“对数组sorted中的每一个元素，
@@ -302,11 +323,12 @@ sort是按照升序来排序，也就是从小到大排序。
 这种自动替换被称为“interpolation(变量内插)”
 这种变量内插只会发生在双引号内，而不会发生在单引号内。
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  my $names = 'things';
 2:  say 'Do not call me $name'; # Do not call me $names
 3:  say "Do not call me $name"; # Do not call me things
-\end{verbatim}
+\end{lstlisting}
 在Perl6中，双引号不仅能够内插魔符\$的变量，同时也可以内插在花括号内的代码块。
 因为任意的Perl代码都可以通过花括号出现，所以可以通过把数组和哈希放在花括号内
 实现内插的效果。
@@ -315,7 +337,8 @@ sort是按照升序来排序，也就是从小到大排序。
 哈希放在花括号内插以后，以多行的形式显示，每一行包括一个键，然后跟着一个制表符。
 然后紧跟这键对应的值，最后加上换行符。
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
 1:  say "Math: {1+2}";                  # Match: 3
 2:  my @people = <Luke Mattew Mark>;
 3:  say "The synoptics are: {@people}"; # The synoptics are :Luck Matthew Mark
@@ -324,12 +347,13 @@ sort是按照升序来排序，也就是从小到大排序。
 6:  # Dave    6
 7:  # Ana     8
 8:  # Beth    4
-\end{verbatim}
+\end{lstlisting}
 当数组和哈希变量直接出现在双引号之间的时候（并没有在花括号之间），那么只有在它们的名字
 后面紧跟方括号的时候才会变量内插。当然你也可以在变量名和postcircumfix之间调用一种
 方法来实现变量内插。
 
-\begin{verbatim}
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
  1:  my @flavours = <vanilla peach>;
  2:  say "we have @flavours";          # we have @flavours
  3:  say "we have @flavours[0]"        # we have vanilla
@@ -341,6 +365,6 @@ sort是按照升序来排序，也就是从小到大排序。
  9:  
 10:  # chained method calls:
 11:  say "we have @flavours.sort.join(',')"; # we have peach ,vanilla
-\end{verbatim}
+\end{lstlisting}
 
 \end{document}
