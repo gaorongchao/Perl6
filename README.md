@@ -5,6 +5,10 @@
 现在Perl 6还在不断更新版本。
 从官网上下载一个MSI文件，双击安装就可以了：
 http://rakudo.org/downloads/star/
+安装完成以后，把安装的路径添加到Path中。具体添加方法，自己百度。
+添加好以后，在命令行中输入perl6 a.pl就可以运行程序了。
+
+
 * linux下
 从网站上下载rakudo-star---.tar.gz,解压以后，文件中README.txt.
 按照说明安装即可。
