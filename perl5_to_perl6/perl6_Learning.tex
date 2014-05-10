@@ -1,0 +1,731 @@
+% Created 2014-05-10 Sat 11:30
+\documentclass{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{background}{rgb}{0.9,0.9,0.9}
+\tolerance=1000
+
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{perl6学习}
+\author{扶 凯}
+\date{\today}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.9.3f}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+\section{Github地址}
+\label{sec-1}
+
+\href{https://github.com/gaorongchao/Perl6/tree/master/perl5_to_perl6}{https://github.com/gaorongchao/Perl6/tree/master/perl5\_to\_perl6}
+所有后续更新都在github上进行，其他地方不做同步。
+发现任何错误，或者不当的地方，请先到github查看是否改正。
+如果没有请留言。或者邮件交流：rongchaogao@gmail.com
+\section{写在perl6之前}
+\label{sec-2}
+
+从95年到现在，很多年过去了，从perl6计划开始到现在，也有10年的时间了。
+所有的事物都在不断的发展，或许perl6还要再开发10年，或者20年，但是未来
+总是属于perl6的。与其等到40岁的时候再去学习一项新的东西，不如从现在开
+始就积极拥抱perl6。
+Perl6现在的版本Rakudo每个月都在更新新的版本。分为两种，一个是Rakudo，
+一个是Rakudo star。大家可以选择安装。
+
+我以前只翻译到第三部分，后面就没有翻译下去。扶凯兄基本上都翻译完成。
+本翻译是在扶凯兄翻译的基础上，加工整理而成。
+\section{perl6的安装}
+\label{sec-3}
+
+perl6的官方网站：perl6.org。上面有perl6相关的东西。其中Compilers
+是Rakudo，也就是perl6的编译器。在rakudo.org里面我们可以下载。或者我
+们可以用git来进行安装。在下载下来的rakudo中有一个install的文件，这里
+包含了安装rakudo所需要的东西，和安装的信息，里面用Ubuntu作为例子，你
+可以根据这个来进行安装。
+
+同时现在提供Rakudo star 的安装包。为windows提供了MSI安装包。
+\href{http://rakudo.org/downloads/star/}{http://rakudo.org/downloads/star/}
+
+安装完成以后，修改一下环境变量，vim .bashrc,然后添加perl6所在的目录
+就可以了。
+\section{学习perl6}
+\label{sec-4}
+
+我看的第一份资料是是从perl6.org/documentation/ 里下载的Perl 5 to 
+perl 6.还有doc.perl6.org里面的的东西。
+首先perl6中不用use strict;和use warnings;了，用了反而会报错。
+\subsection{字符串,数组和哈希}
+\label{sec-4-1}
+
+用法
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+ 1:  # 首先不需要use strict;use warnings;
+ 2:  
+ 3:  my $five =5 ;
+ 4:  print " $five\n";
+ 5:  say "five is $five";
+ 6:  # 上面是一样的效果，say 自带换行符
+ 7:  
+ 8:  my @array =1,2,3,'foo';
+ 9:  my $sum=@array[0]+@array[1];
+10:  say "sum is $sum";
+11:  # 数组的元素可以这样写了。
+12:  if $sum>@array[2]
+13:  {
+14:      say "not executed";
+15:  }
+16:  # if 语句这样写了，不用括号了
+17:  my $number_of_elems=@array.elems;        
+18:  # 下面这样也可以
+19:  my $number_of_elems=+@array;
+20:  say "number of elems $number_of_elems";
+21:  # 数组元素的个数,不在支持$# 了。
+22:  
+23:  my $last_item=@array[*-1];
+24:  say "last item is $last_item";
+25:  # 数组的最后一个元素
+26:  
+27:  my %hash= foo=>1,bar=>2,baz=>3;
+28:  say "hash bar is  %hash{'bar'}";
+29:  say "hash bar is  %hash<bar>";# 和上面一样的效果
+30:  # %hash{bar} 这样是错误的。
+31:  # 这是要去找一个叫bar()的子程序，很显然我们这里没有定义。
+\end{lstlisting}
+perl6和perl5类似，只不过更好而已。一句话是由分号终止，
+在一个语句块，或者大括号之间代码的最后一行，分号是可加，可不加的。
+变量仍然由\$,@,\%等打头。许多perl5的功能依然健在。
+\subsubsection{字符串strings}
+\label{sec-4-1-1}
+
+字符串被双引号包括（变量内插）或者用单引号，反斜杠和perl5一样。
+变量内插的规则有了一些变化，下面的情况将被变量内插
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+ 1:  my $scalar = 6;
+ 2:  my @array =1,2,3;
+ 3:  say "Perl scalar is $scalar";
+ 4:  say "array数组的所有元素 @array[]";       
+ 5:  #空索引，结果是整个数组，1，2，3
+ 6:  say "array 数组的第二个元素 @array[1]";
+ 7:  say "没有索引，不会显示数组的名称： @array"; 
+ 8:  # 打印@array这几个字符
+ 9:  say "双引号内执行代码：Code:{$scalar*2}";  
+10:  #大括号中的部分会被看成代码，结果是内插的，结果是12
+\end{lstlisting}
+数组和hash只有在后面跟着索引的时候，或者跟着以（）结尾的方法的时候才会变量内插。
+如”some \$obj.method()''),空的索引内插整个hash或者数组。
+\subsubsection{数组}
+\label{sec-4-1-2}
+
+数组变量仍然以@开头，但是不同的是即使取其中的单个元素也是以@开头的。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  my @a =5,1,2;                         
+2:  #列表是用逗号来分割构建的，不用括号了。
+3:  say "数组的所有元素 @a[]";
+4:  say "数组的第一个元素 @a[0]";            # 不再是$a[0]
+5:  say "数组的第一个和第三个元素 @a[0,2]";   # 数组切片仍然可以用
+\end{lstlisting}
+列表是用逗号分割构建的。1,是一个列表，（1）不是。
+
+由于现在一切都可以看成对象，你可以用数组的方法来对数组进行操作。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+ 1:  my @a =5,1,2;             #列表是用逗号来分割构建的。
+ 2:  say "数组a @a[]";
+ 3:  
+ 4:  my @b=@a.sort;           #排序后的数组a
+ 5:  say "排序后的数组 @b[]";
+ 6:  my $num_of_array_b=@b.elems;
+ 7:  say "b的元素个数 $num_of_array_b";
+ 8:  if @b>2 {say "如果元素个数大于2，yes"}
+ 9:  
+10:  my $end_of_array_b=@b.end;
+11:  say "b的最后一个元素的索引， $end_of_array_b";#替代了$#
+12:  my @c=@b.map({$_*2});    # map 同样还是一种方法。
+13:  say "数组c @c[]";
+\end{lstlisting}
+这里有一种qw/../的简写形式：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  my @methods = <shift unshift push pop end delete sort map>;
+\end{lstlisting}
+数组相关新方法
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  @array.keys();       #取得数组的下标
+2:  @array.values();     #取得数组的值
+3:  @array.kv();         #下标和值一起取得
+4:  @array.elems();      #元素的个数
+5:  @array.exists(num)； #判断某个下标值是否存在，
+6:  @array.max()；       #最大值
+7:  @array.min()；       #最小值
+\end{lstlisting}
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  @array.pick(num);   #随机取出数组中的不重复元素
+2:  #例子
+3:  my @array = <a b c d e>;
+4:  say @array.pick(4);
+5:  say @array.pick(*);#*代表所有元素
+\end{lstlisting}
+\subsection{hash哈希}
+\label{sec-4-2}
+
+Perl 5 中的哈希在列表环境中依然是一个列别。
+但是Perl 6 在列表环境中是列表对。列表对在其他方面也有广泛应用，
+比如，子程序中的具名参数。后面会有更多的应用。
+如同数组一样，哈希也有不同的调用方法。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  my %drinks =
+2:      France  => 'Wine',
+3:      Bavaria => 'Beer',
+4:      USA     => 'Coke';
+5:  say "The people in France love ",%drinks{'France'};
+6:  my @countries = %drinks.keys.sort;
+7:  #%drinks{'France'};现在的用法
+8:  #$drinks{France};  以前的用法
+9:  #%drinks<France>;  现在也可以这样用
+\end{lstlisting}
+注意：当你访问hash的元素的时候\%hash\{...\},键并不会自动添加引号,
+\%hash\{foo\}不是去访问foo的值，而是调用名称为foo()的子程序。自动quoting
+并没有消失，只不过换了一种方式：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  say %drinks<Bavaria>;
+\end{lstlisting}
+所有的内建方法，可以是method也可以是一个子程序，所以这两种方法
+都对，sort @array 或者 @array.sort.\\
+最后你要知道，所有的[..] \{..\}(occurring direct after a term)
+仅仅是在使用一个特定的方法，而不是和数组和哈希绑定的。这意味着，他们并不在依赖于特殊的魔符。
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  my $a = [1,2,3];
+2:  say $a[2];      #3
+3:  #this implies that you don't need special dereferencing syntax,and that you can
+4:  #act as arrays, hashes and subs at the same time.没整明白？？？
+\end{lstlisting}
+从这里，我们可以看到，以后不用特殊的解引用的方法，并且您可以创建能同时充当数组，哈希和子程序的
+对象。
+\subsection{Types 类型}
+\label{sec-4-3}
+
+概要：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+my Int $x=3;
+$x="foo";   # 这里会报错，原因是，我们上面一句把$x 
+# 定义为Int也就是整数，但是这里我们却给他复制一个字符串
+say $x.WHAT; # 'Int()'
+
+# 检查一个变量的类型
+if $x~~Int
+{
+    say '$x contains an Int';
+｝
+\end{lstlisting}
+在perl6中有了类型，所有的东西都可以看成一个对象，都有一个类型。
+变量也可以有一个类型的约束，但是，不是必须需要一个类型。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  'a string'  #str字符串
+2:  2           #int整数型
+3:  3.14        #Rat (rational number)有理数
+4:  （1，2，3)   #Seq列表
+\end{lstlisting}
+所有的内建类型都是大写字母开头，所有的标准类型都是继承了Any，并且所有的都继承了Mu
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+#你可以在声明的时候，加上类型
+my Numeric $x = 3.4;
+my $Int @a = 1,2,3;
+# 试图把一个值赋予一个错误的类型会提示出错
+
+#对一个数组类型的类型定义，作用在数组的元素上，
+#Str @s  @s这个数组只能够包含字符串元素的数组
+\end{lstlisting}
+一些类型是隶属与一个大的分类，比如：整数型（Int），有理数（Rat），浮点型（Num）都是属于
+Numeric这个大的类型
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+#要知道一个对象的类型，可以使用.WHAT的方法
+say "foo".WHAT;
+#如果你要确定一个某变量是不是某一特殊类型，
+#这里有一个一个不同的方法,这种方法把继承考虑在内
+#在这里我们推荐使用这种方法
+if $x ~~ Int
+{
+    say 'Variable $x contains an integer';
+}
+\end{lstlisting}
+虽然这种类型系统让我们很难彻底领悟它的所有细节。但是我们依然有很多理由使用它。
+
+我们需要类型的原因：
+\begin{itemize}
+\item 1.编程更加安全
+\end{itemize}
+如果你声明了一个特殊的类型，那么你可以执行特定的某种操作，而不用检查
+\begin{itemize}
+\item 2.可优化
+\end{itemize}
+如果在编译的时候提供了类型，那么运行的程序会有明显的优化。在原则上perl6
+不会比C慢
+\begin{itemize}
+\item 3.可扩展型
+\end{itemize}
+有了类型信息和多重的操作路径，你可以很容易对特定的类型改善操作
+\subsection{基本的控制结构}
+\label{sec-4-4}
+\subsubsection{概要}
+\label{sec-4-4-1}
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+ 1:  my $percent=120;
+ 2:  if $percent >100
+ 3:  {
+ 4:      say "weird mathematics";
+ 5:  }
+ 6:  
+ 7:  for 1..3
+ 8:  {
+ 9:      #用$_作为默认循环的变量
+10:      say 2*$_;
+11:  }
+12:  
+13:  for 1..3 -> $x
+14:  {
+15:      # 用一个明确的循环变量
+16:      say 2*$x;
+17:  }
+18:  
+19:  while $stuff.is_wrong
+20:  {
+21:      $stuff.try_to_make_right;
+22:  }
+23:  die "Access denied" unless $password eq "Secret";
+\end{lstlisting}
+perl6 和perl5 的控制结构基本相同，最大的不同是你不必在if,while,for等，后面添加
+小括号了。事实上，所有的标示符后面紧跟着小括号，都会被看成在调用一个名称为if的子程序，
+for后面加一个空格，可以改善这种情况，但是直接省略括号更加安全。
+\subsubsection{分支}
+\label{sec-4-4-2}
+
+\begin{itemize}
+\item if控制结构：if结构是变化最小的，你依然可以用elsif和else，
+\end{itemize}
+unless也还在，但是在unless后面不允许else分支结构
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  if $sheep == 0 {say "how boring";}
+2:  elsif $sheep ==1 {say "one lonely sheep";}
+3:  else {say "a herd,How lovely!";}
+\end{lstlisting}
+你现在依然可以使用if和unless作为语句的修饰，也就是后声明的方式：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+say "you won" if $answer == 42;
+\end{lstlisting}
+\begin{itemize}
+\item Loops：和perl5一样，你依然可以通过next和last来控制循环。
+\end{itemize}
+
+在这里for循环只用于遍历列表，默认的变量依然是\$\_,同时你也可以显式的
+声明一个循环变量。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+1:  for 1..100 -> $x
+2:  {
+3:      say $x;#会输出1 2 3 。。
+4:  }
+\end{lstlisting}
+->\$x\{..\}被称为‘pointy block'如同匿名子程序或者lisp中的lambda。
+
+当然，也可以有不止一个的循环变量。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+for 0..5 ->$even,$odd
+{
+    say "Even: $even \t Odd: $odd";
+}
+#结果如下：
+#Event:1     Odd:2
+#Event:3     Odd:4
+#也就是交替出现
+
+#这个也是遍历哈希的方法
+my %hash=
+    a   => 1,
+    b   => 2,
+    c   => 3;
+for %hash.kv -> $key,$value
+{
+    say "$key: $value";
+}
+
+#C-风格的for循环,唯一需要括号的循环结构
+loop （my $x=1;$x<100;$x**2)
+{
+    say $x;
+}
+\end{lstlisting}
+\subsection{Subroutines and Signatures 子程序和参数}
+\label{sec-4-5}
+\subsubsection{语法}
+\label{sec-4-5-1}
+
+\begin{itemize}
+\item Perl5 样式的子程序
+\end{itemize}
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+# 没有signature(参数)
+sub print_arguments 
+{
+        say "Arguments:";
+        for (@_)
+        {
+                say "\t$_";
+        }
+}
+my @argument = qw/1 2 3 4/;
+print_arguments(@argument);
+\end{lstlisting}
+\begin{itemize}
+\item 拥有参数名称和类型的子程序
+\end{itemize}
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub distance (Int $x1, Int $y1, Int $x2, Int $y2)
+{
+        return sqrt ($x2-$x1)**2 + ($y2-$y1)**2;
+}
+say distance(3,5,0,1);
+# 结果是3^2 + 4^2然后开方结果是5
+\end{lstlisting}
+\begin{itemize}
+\item 默认参数
+\end{itemize}
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub logarithm($num,$base = 2.7183)
+{
+        return log($num)/log($base)
+}
+say logarithm(4);
+# 1.38628
+# 这里之提供了一个参数，所以第二个就是使用的默认的参数
+say logarithm(4,2);
+# 2
+# 这里提供了两个参数，所以默认参数不再起作用
+\end{lstlisting}
+\begin{itemize}
+\item 具名参数（named arguments)
+\end{itemize}
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub doit(:$when, :$what)
+{
+        say "doign $what at $when";
+}
+doit(what => "stuff",when => "once");
+# doing stuff at onec
+doit(:when<noon>, :what("more stuff"));
+# doing more stuff at noon
+\end{lstlisting}
+\subsubsection{描述}
+\label{sec-4-5-2}
+
+子程序是又sub开头的关键字进行声明，可以拥有一系列的参数，
+如同C,Java和其他大多数程序语言一样。
+这些参数可以选择性的有类型的限制。
+
+参数默认是只读的。但是可以通过所谓的“特性”来进行修改。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub try-to-reset($bar)
+{
+        $bar = 2; # 禁止的
+}
+
+my $x = 2;
+sub reset($bar is rw)
+{
+        $bar=0; # 允许的
+}
+reset($x);
+say $x; # 0
+
+sub quox($bar is copy)
+{
+        $bar=3;
+}
+quox($x);
+say $x; # is still 0
+\end{lstlisting}
+参数可以通过在后面添加？进行选择性是否需要这个参数。
+也可以通过提供一个默认值。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub foo($x,$y?)
+{
+        if $y.defined
+        {
+                say "Second parameter was supplied and defined";
+        }
+        else
+        {
+                say "Don't have second parameter!";
+        }
+}
+foo(5,6); # Secon parameter was supplied and defined
+foo(5);   # Don't have second parameter!
+\end{lstlisting}
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub bar($x,$y=2*$x)
+{
+...
+}
+\end{lstlisting}
+\begin{itemize}
+
+\item 具名参数\\
+\label{sec-4-5-2-1}%
+当你调用一个像这样的参数的时候：my$_{\mathrm{sub}}$(\$first,\$second),
+\$first参数和第一个参数是绑定的，\$second参数和第二个参数
+是绑定的。这也是为什么称之为“位置参数“。
+
+有些时候，名称比数字更好记忆，这是为什么Perl6有”具名参数的原因。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+my $r = Rectangle.new(
+                x         => 100,
+                y         => 200,
+                height=> 23,
+                width => 42,
+                color => "black");
+\end{lstlisting}
+但你看到这种形式的东西的时候，你立马就能明白参数的意义。
+为了定义一个具名参数，你只需要在参数前面添加一个冒号。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub area (:$width,:$height)
+{
+        return $width * $height;
+}
+area(width =>2,height=>3);
+area(height =>3,width=>2);
+area(:height(3),:width(2));
+\end{lstlisting}
+最后一个例子用了所谓的“冒号配对”语法形式。
+如果仅仅有留下名字，那么会赋值为''True'',取反则会赋值为''False'':
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+:draw-perimeter      # same as "draw-perimeter=>True"
+:!transparent        # same as "transparent   =>False"
+\end{lstlisting}
+在具名参数的声明中，变量名同时用做参数的名字。你也可以用不同的名字：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub area (:width($w),:height($h))
+{
+    return $w*$h;
+}
+area(width=>2,height=>3);
+\end{lstlisting}
+
+\item Slurpy Parameters\\
+\label{sec-4-5-2-2}%
+仅仅给你的子程序命一个名字，并不意味着你事先知道子程序有多少个参数。
+你可以定义所谓的slurpy parameters(在所有的正式的参数后面）可以
+用所有的剩余参数。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub tail ($first, *@rest)
+{
+        say "first: $first";
+        say "Rest: @rest[]";
+}
+tail(1,2,3,4);
+# 结果是:First: 1 \n Rest:2 3 3\n";
+\end{lstlisting}
+具名slurpy参数是通过在哈希参数前加星号来完成的。(??????)
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub order-meal ($name,*%extras)
+{
+        say "I'd like somen $name, but with a few modifications:";
+        say %extras.keys.join(', ');
+}
+order-meal ('beef steak', :vegetarian, :well-done);
+\end{lstlisting}
+
+\item Interpolation 变量内插\\
+\label{sec-4-5-2-3}%
+默认情况下，数组不能内插在变量中，与Perl5不同，你可以这些写：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+sub a($scalar1,@list,$scalar2)
+{
+        say $scalar2;
+}
+my @list = "foo","bar";
+a(1,@list,2); # 2
+\end{lstlisting}
+这也意味着你不能用列表来作为参数列表。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+my @indexes=1,4;
+say "abc".substr(@indexes); # 结果是c
+\end{lstlisting}
+（真实发生的事情是：这第一个参数可以是Int类型，如果不是，强制转换成Int.
+所以你写成''abc.''substr(@indexes.elems)是一样的。）
+你可以通过使用使用潜前置的|来实现预定的功能：
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+say "abcdefgh".substr(|@indexes) # bcde,same as "abcdefgh".substr(1,4);
+\end{lstlisting}
+
+\item Multi Subs 多样子程序\\
+\label{sec-4-5-2-4}%
+实际上，你可以用同一个子程序名称来定义多个具有不同参数列表的子程序。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+multi sub my_substr($str) {...}
+multi sub my_substr($str,$start) {...}
+multi sub my_substr($str,$start,$end) {...}
+multi sub my_substr($str,$start,$end,$subst) {...}
+\end{lstlisting}
+你定义好了以后，当你调用这种子程序的时候，其中能匹配参数列表的子程序将
+被调用。
+
+这种多样子程序不仅仅能够区分参数的个数，而且能能够区分参数的类型。
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+multi sub frob (Str $s) {say "Frobbing String $s"}
+multi sub frob (Int $i) {say "Frobbing Integer $i"}
+frob ("x");
+frob (2);
+# 结果
+# Frobbing String x
+# Frobbing Integer 2
+\end{lstlisting}
+
+\end{itemize} % ends low level
+\subsubsection{Motivation真实意图}
+\label{sec-4-5-3}
+
+没人会怀疑给子程序参数一个明确名称的重要性：
+更少的输入，更少的双重参数的检查，更多的自我说明性质的代码。
+
+同时也允许有用的自省。
+？？？？
+\subsection{Objects and Classes}
+\label{sec-4-6}
+\subsubsection{语法}
+\label{sec-4-6-1}
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+
+\end{lstlisting}
+\subsection{Contexts 上下文}
+\label{sec-4-7}
+\subsubsection{语法}
+\label{sec-4-7-1}
+
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+my @a = <a b c>;
+my $x = @a;
+say $x[2];
+say (~2).WHAT;
+say +@a;
+if @a <10 {say "short array";}
+\end{lstlisting}
+\subsubsection{描述}
+\label{sec-4-7-2}
+
+当你这样写的时候
+
+\lstset{columns=flexible,backgroundcolor=\color{background},frame=trBL,frameround=fttt,breaklines=true,language=Perl}
+\begin{lstlisting}
+$x = @a;
+\end{lstlisting}
+在Perl5中，\$x 只包含@a的元素的数量。
+为了保留所有的信心，你必须要用引用：\$x = \@a;
+
+在Perl6 中，用数值变量储存数组变量，你不会丢失任何东西。
+这样为上下文和更多的特殊上下文（数值，整数，和字符串）做好了准备。
+Void(空)和列表上下文没有变化。
+你可以强制通过语法强制转换上下文环境。
+
+\end{document}
