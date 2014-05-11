@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>11: Built-in types,operators and methods</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="11: Built-in types,operators and methods"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-05-11T23:11+0800"/>
+<meta name="author" content="GRC(扬眉剑)"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">11: Built-in types,operators and methods</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 github地址</a></li>
+<li><a href="#sec-2">2 引入</a></li>
+<li><a href="#sec-3">3 数字</a></li>
+<li><a href="#sec-4">4 字符串</a></li>
+<li><a href="#sec-5">5 布尔类型</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> github地址</h2>
+<div class="outline-text-2" id="text-1">
+
+<p><a href="https://github.com/gaorongchao/Perl6/tree/master/Using_perl6">https://github.com/gaorongchao/Perl6/tree/master/Using_perl6</a>
+</p>
+<p>
+所有后续更新都在github上进行，其他地方不做同步。
+发现任何错误，或者不当的地方，请先到github查看是否改正。
+如果没有请留言。或者邮件交流：rongchaogao@gmail.com
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 引入</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>很多操作符都需要一种特定类型的数据。
+如果操作对象和要操作对象的类型不统一，
+Perl会复制一份操作对象，然后将它转换成需要的类型。
+比如：$a+$b 将把$a和$b的副本转换成数字（如果它们
+已经都是数字了除外）。这种隐式的转换被称为强制转换（coercion)。
+</p>
+<p>
+除了操作符，其他一些语法也会强制转换，if 和 while 会把数据转换成
+真假（布尔值），for会把数据转换成列表，等等。
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 数字</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>有些时候强制转换都是透明的。Perl 6 中有许多数字类型，他们都可以混合使用。
+比如：用一个整数减去一个浮点数，123-12.1e1。
+</p>
+<p>
+这里面最重要的类型是：
+</p><ul>
+<li>Int
+</li>
+</ul>
+
+<p>Int对象存储的是任意大小的整数。如果你如果你写的文字只包含数字，比如12，那么
+他就是 Int。
+</p><ul>
+<li>Num
+</li>
+</ul>
+
+<p>Num是浮点型数据。它存储着符号，小数部分和指数，每一个都有固定的长度。
+</p>
+<p>
+用科学记数法表示的数字比如 6.022e23 就是Num类型的数字。
+</p>
+<ul>
+<li>Rat
+</li>
+</ul>
+
+<p>Rat是有理数的缩写，存储小数的时候不会损失精度。这是通过跟踪作为整数的
+分子和分母来实现的。所以当数学运算在遇到很大的组成部分(large components)
+的有理数的时候，运算速度会非常的慢。因为这个原因，当有理数有一个大分母的时候
+会自动讲解为Num类型。
+</p>
+<p>
+所以写一个以小数点为分隔符的分数值，比如3.14，就是一个Rat 类型的数。
+</p>
+<ul>
+<li>Complex 复数
+</li>
+</ul>
+
+<p>复数有两个部分，实部和虚部，如果其中任何一部分为 NaN，然后整个数字也许就是 NaN。
+</p>
+<p>
+复数是这种形式 a + bi , bi 是虚部。
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> 字符串</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> 布尔类型</h2>
+<div class="outline-text-2" id="text-5">
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-05-11T23:11+0800</p>
+<p class="author">Author: GRC(扬眉剑)</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
