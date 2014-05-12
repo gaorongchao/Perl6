@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="11: Built-in types,operators and methods"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2014-05-11T23:11+0800"/>
+<meta name="generated" content="2014-05-12T11:44+0800"/>
 <meta name="author" content="GRC(扬眉剑)"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -106,7 +106,97 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012-2013  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
 
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -124,9 +214,21 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1 github地址</a></li>
 <li><a href="#sec-2">2 引入</a></li>
-<li><a href="#sec-3">3 数字</a></li>
-<li><a href="#sec-4">4 字符串</a></li>
-<li><a href="#sec-5">5 布尔类型</a></li>
+<li><a href="#sec-3">3 数字</a>
+<ul>
+<li><a href="#sec-3-1">3.1 双目操作符</a></li>
+<li><a href="#sec-3-2">3.2 单目运算符</a></li>
+<li><a href="#sec-3-3">3.3 数学函数或方法调用</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 字符串</a>
+<ul>
+<li><a href="#sec-4-1">4.1 字符串双目操作符</a></li>
+<li><a href="#sec-4-2">4.2 字符串单目操作符</a></li>
+<li><a href="#sec-4-3">4.3 字符串函数，调用方法</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 布尔值</a></li>
 </ul>
 </div>
 </div>
@@ -211,7 +313,84 @@ Perl会复制一份操作对象，然后将它转换成需要的类型。
 </p>
 <p>
 复数是这种形式 a + bi , bi 是虚部。
-</p></div>
+</p>
+<p>
+下面所有的操作符都可以操作上面的数字类型。：
+</p>
+<p>
+大部分数学函数都既可以写成方法调用也可以写成函数的形式，所以你既可以这样写，
+(-5).abs 也可以这样写 abs(-5)。
+</p>
+<p>
+三角函数 sin, cos, tan, asin, acos, atan, sec, cosec, cotan, asec, 
+acosec, acotan, sinh, cosh, tanh, asinh, acosh, atanh, sech, cosech,
+ cotanh, asech, acosech 和 acotanh 默认用弧度来计算。当然你可以自己指定一个
+参数来使用 Degrees , Gradians , Circles 来进行三角函数的计算。
+比如：180.sin(Degrees) 近似等于0。
+</p>
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 双目操作符</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">**</td><td class="left">乘方</td></tr>
+<tr><td class="left">\(*\)</td><td class="left">乘法</td></tr>
+<tr><td class="left">/</td><td class="left">除法</td></tr>
+<tr><td class="left">div</td><td class="left">整除</td></tr>
+<tr><td class="left">%</td><td class="left">取余</td></tr>
+<tr><td class="left">+</td><td class="left">加</td></tr>
+<tr><td class="left">\(-\)</td><td class="left">减</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 单目运算符</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">+</td><td class="left">转换为数值</td></tr>
+<tr><td class="left">\(-\)</td><td class="left">非 取反</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> 数学函数或方法调用</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">abs</td><td class="left">绝对值</td></tr>
+<tr><td class="left">sqrt</td><td class="left">平方根</td></tr>
+<tr><td class="left">log</td><td class="left">自然对数</td></tr>
+<tr><td class="left">log10</td><td class="left">以10为底的自然对数</td></tr>
+<tr><td class="left">ceil</td><td class="left">不小于当前数的整数</td></tr>
+<tr><td class="left">floor</td><td class="left">不大于当前数的整数</td></tr>
+<tr><td class="left">round</td><td class="left">四舍五入</td></tr>
+<tr><td class="left">sign</td><td class="left">正负号，-1是负数，0是0，1是正数</td></tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 
 </div>
 
@@ -219,21 +398,125 @@ Perl会复制一份操作对象，然后将它转换成需要的类型。
 <h2 id="sec-4"><span class="section-number-2">4</span> 字符串</h2>
 <div class="outline-text-2" id="text-4">
 
+<p>字符串存储类型为 Str ，存储的内容是一串字符，独立于字符编码之外（？）。
+Buf 类型的字符串存储的是二进制数据。调用 encode 方法可以把 Str 类型转换成
+ Buf 类型。 decode 把 Buf 类型转换为 Str 。
+</p>
+<p>
+下面是对字符串的操作符：
+</p>
+</div>
 
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 字符串双目操作符</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">~</td><td class="left">连接操作符：'a'~'b' 变成 'ab'</td></tr>
+<tr><td class="left">x</td><td class="left">重复操作符号：'a' x 2 变成 'aa'</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 字符串单目操作符</h3>
+<div class="outline-text-3" id="text-4-2">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">~</td><td class="left">转换成字符串：~1 变成 '1'</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> 字符串函数，调用方法</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">.chomp</td><td class="left">去掉字符串末尾的换行符</td></tr>
+<tr><td class="left">.substr($start,$length)</td><td class="left">截取一段字符，$length 默认是剩下的字符的长度</td></tr>
+<tr><td class="left">.chars</td><td class="left">字符串中字符的数目</td></tr>
+<tr><td class="left">.uc</td><td class="left">转换为大写</td></tr>
+<tr><td class="left">.lc</td><td class="left">转换为小写</td></tr>
+<tr><td class="left">.ucfirst</td><td class="left">把第一个字符转换为大写字符</td></tr>
+<tr><td class="left">.lcfirst</td><td class="left">把第一个字符转换成小写</td></tr>
+<tr><td class="left">.capitalize</td><td class="left">把单词的第一个字符转换为大写，其他字符转换为小写</td></tr>
+</tbody>
+</table>
+
+</div>
 </div>
 
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> 布尔类型</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> 布尔值</h2>
 <div class="outline-text-2" id="text-5">
+
+<p>一个布尔值要么是 True 要么是 False 。
+任何值在布尔上下文中都可以转换为布尔值。
+决定一个值是真还是假的规则因值的类型不同而不同：
+</p><ul>
+<li>字符串，空字符串和'0'被认为是 False。其他类型转换为 True 。
+</li>
+<li>数值，0为假，其他都为真
+</li>
+<li>列表和哈希，类型的集合比如，列表，和哈希，如果是空的，那么认为是False，反之认为是True。
+</li>
+</ul>
+
+
+<p>
+if 等控制结构可以自动在布尔上下中，根据条件，计算真假。
+你可以通过在表达式前添加？，来强制转换为布尔上下文。
+</p>
+<p>
+前置的!可以用来取反，若它后面的操作数为真，就返回假。
+</p>
+
+
+<pre class="example">my $num=5;
+
+# 隐式的布尔环境
+if $num { say "True" }
+
+# 明确的布尔环境
+my $bool=?$num;
+say $bool;
+
+# 取反
+my $not_num=!$num;
+say $not_num;
+
+C:\Windows\system32\cmd.exe /c perl6 a.pl
+True
+True
+False
+Hit any key to close this window...
+
+</pre>
 
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2014-05-11T23:11+0800</p>
+<p class="date">Date: 2014-05-12T11:44+0800</p>
 <p class="author">Author: GRC(扬眉剑)</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
